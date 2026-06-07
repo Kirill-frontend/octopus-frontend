@@ -1,0 +1,17 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+interface Props {
+  introText: string;
+  badgeText: string;
+}
+
+const { introText, badgeText } = Astro.props as Props;
+---
+
+<section class="service-detail-intro-badge">
+  <div class="service-detail-page__container service-detail-intro-badge__inner">
+    <p class="service-detail-intro-badge__text">{introText}</p>
+    <div class="service-detail-intro-badge__badge">{badgeText}</div>
+  </div>
+</section>

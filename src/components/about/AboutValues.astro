@@ -1,0 +1,62 @@
+---
+import "../../assets/about/about-shared.css";
+import "../../assets/about/about-values.css";
+import {
+  resolvePayloadOrFallbackAlt,
+  resolvePayloadOrFallbackUrl,
+} from "../../lib/payload";
+
+const {
+  data = {},
+} = Astro.props;
+
+const values = Array.isArray(data?.items) ? data.items : [];
+---
+
+<section class="about-values" id="our-values">
+  <div class="about-values__container">
+    <div class="about-values__intro">
+      <div class="about-values__intro-main">
+        <p class="about-eyebrow">{data?.eyebrow || "Our values"}</p>
+        <h2 class="about-values__title">
+          {data?.title || "The values that drive everything we do."}
+        </h2>
+      </div>
+      <p class="about-values__intro-text">
+        {
+          data?.introText ||
+            "Our culture is built around practical excellence, accountability, and long-term relationships that make demanding work easier to deliver well."
+        }
+      </p>
+    </div>
+
+    <div class="about-values__grid">
+      {
+        values.map((value) => {
+          const iconUrl = resolvePayloadOrFallbackUrl(value?.icon, value?.iconUrl);
+          const iconAlt = resolvePayloadOrFallbackAlt(value?.icon, value?.iconAlt, "");
+
+          return (
+            <article class="about-value-card">
+              {
+                iconUrl && (
+                  <div class="about-value-card__icon">
+                    <img
+                      src={iconUrl}
+                      alt={iconAlt}
+                      class="about-value-card__icon-image"
+                      loading="lazy"
+                      aria-hidden="true"
+                    />
+                  </div>
+                )
+              }
+              <h3 class="about-value-card__title">{value?.title}</h3>
+              <p class="about-value-card__text">{value?.description}</p>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

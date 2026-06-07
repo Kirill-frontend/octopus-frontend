@@ -1,0 +1,200 @@
+---
+import "../assets/header.css";
+import CmsImage from "./shared/CmsImage.astro";
+import { resolveLinkHref, resolvePayloadMediaAlt, resolvePayloadMediaUrl } from "../lib/payload";
+
+const { isOpaque = false, background = "transparent", data } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const navItems =
+  data?.navItems?.map((item) => ({
+    href: resolveLinkHref(item),
+    label: item.label,
+  })) ?? [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+const ctaHref = data?.ctaUrl || "/contact";
+const ctaLabel = data?.ctaLabel || "Get a quote";
+const logoUrl = resolvePayloadMediaUrl(data?.logo);
+const logoAlt = resolvePayloadMediaAlt(data?.logo, "Octopus Group");
+const logoClass = ["site-header__logo", !isOpaque && "site-header__logo--white"]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class="header-positioner">
+  <header
+    class:list={["site-header", { "site-header--opaque": isOpaque }]}
+    style={{ "--site-header-background": background }}
+  >
+    <div class="site-header__container">
+      <a href="/" class="site-header__logo-link" aria-label="Octopus Group home">
+        <CmsImage
+          src={logoUrl}
+          alt={logoAlt}
+          class={logoClass}
+          wrapperClass="site-header__logo-wrap"
+          loading="eager"
+          fetchpriority="high"
+          placeholderLabel="Octopus Group"
+        />
+      </a>
+
+      <div class="site-header__right">
+        <nav class="site-header__nav" aria-label="Main navigation">
+          <ul class="site-header__nav-list">
+            {
+              navItems.map((item) => {
+                const isCurrent = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+
+                return (
+                  <li class="site-header__nav-item">
+                    <a
+                      href={item.href}
+                      class:list={[
+                        "site-header__nav-link",
+                        { "site-header__nav-link--current": isCurrent },
+                      ]}
+                      aria-current={isCurrent ? "page" : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+
+        <a href={ctaHref} class="site-header__cta site-header__cta--desktop">
+          {ctaLabel}
+          <span aria-hidden="true" class="site-header__cta-arrow">-&gt;</span>
+        </a>
+
+        <button
+          class="site-header__menu-button"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-menu-button
+        >
+          <span class="site-header__menu-bar"></span>
+          <span class="site-header__menu-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="site-header__mobile-panel" hidden data-menu-panel>
+      <nav class="site-header__mobile-nav" aria-label="Mobile navigation">
+        <ul class="site-header__mobile-list">
+          {
+            navItems.map((item) => {
+              const isCurrent = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+
+              return (
+                <li class="site-header__mobile-item">
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "site-header__mobile-link",
+                      { "site-header__mobile-link--current": isCurrent },
+                    ]}
+                    aria-current={isCurrent ? "page" : undefined}
+                    data-menu-link
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+
+      <a href={ctaHref} class="site-header__cta site-header__cta--mobile" data-menu-link>
+        {ctaLabel}
+        <span aria-hidden="true" class="site-header__cta-arrow">-&gt;</span>
+      </a>
+    </div>
+  </header>
+</div>
+
+<style>
+  .site-header__logo-wrap {
+    width: 148px;
+    height: 34px;
+    background: transparent;
+  }
+
+  .site-header__logo-wrap :global(.cms-image__placeholder) {
+    background: transparent;
+    color: #ffffff;
+    justify-content: flex-start;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  :global(.site-header__logo--white) {
+    filter: brightness(0) invert(1);
+  }
+</style>
+
+<script>
+  const header = document.querySelector(".site-header");
+  const menuButton = header?.querySelector("[data-menu-button]");
+  const menuPanel = header?.querySelector("[data-menu-panel]");
+  const menuLinks = header?.querySelectorAll("[data-menu-link]");
+  const mobileBreakpoint = window.matchMedia("(max-width: 991px)");
+
+  const closeMenu = () => {
+    if (!header || !menuButton || !menuPanel) return;
+    header.classList.remove("site-header--menu-open");
+    menuButton.setAttribute("aria-expanded", "false");
+    menuPanel.hidden = true;
+    document.body.classList.remove("menu-open");
+  };
+
+  const openMenu = () => {
+    if (!header || !menuButton || !menuPanel) return;
+    header.classList.add("site-header--menu-open");
+    menuButton.setAttribute("aria-expanded", "true");
+    menuPanel.hidden = false;
+    document.body.classList.add("menu-open");
+  };
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = header?.classList.contains("site-header--menu-open");
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  menuLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      closeMenu();
+    });
+  });
+
+  mobileBreakpoint.addEventListener("change", (event) => {
+    if (!event.matches) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+</script>

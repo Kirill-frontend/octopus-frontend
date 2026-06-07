@@ -1,0 +1,61 @@
+---
+const {
+  eyebrow,
+  title,
+  description,
+  background = "#f2f5f7",
+} = Astro.props;
+---
+
+<section class="cms-page-hero" style={{ "--cms-page-hero-background": background }}>
+  <div class="cms-page-hero__container">
+    {eyebrow && <p class="cms-page-hero__eyebrow">{eyebrow}</p>}
+    {title && <h1 class="cms-page-hero__title">{title}</h1>}
+    {description && <p class="cms-page-hero__description">{description}</p>}
+  </div>
+</section>
+
+<style>
+  .cms-page-hero {
+    padding: 140px 20px 72px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.9)),
+      var(--cms-page-hero-background);
+  }
+
+  .cms-page-hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cms-page-hero__eyebrow {
+    margin: 0 0 12px;
+    color: #0e3b5b;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .cms-page-hero__title {
+    margin: 0;
+    max-width: 760px;
+    color: #101820;
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    line-height: 1.04;
+  }
+
+  .cms-page-hero__description {
+    margin: 24px 0 0;
+    max-width: 720px;
+    color: rgba(16, 24, 32, 0.78);
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 767px) {
+    .cms-page-hero {
+      padding: 120px 20px 56px;
+    }
+  }
+</style>

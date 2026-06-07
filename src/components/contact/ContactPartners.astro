@@ -1,0 +1,99 @@
+---
+import "../../assets/contact/contact-partners.css";
+import {
+  resolvePayloadOrFallbackAlt,
+  resolvePayloadOrFallbackUrl,
+} from "../../lib/payload";
+
+const {
+  data = {},
+} = Astro.props;
+
+const logos = Array.isArray(data?.logos)
+  ? data.logos
+  : [
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c913c893896a3a7d308a_agency-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Agency",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c9148833410d1758f432_application-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Application",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c9144a0df8b19a406ae1_business-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Business",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c913150e64e2950a466b_company-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Company",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c9135b8879d94e9d05a1_enterprise-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Enterprise",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c9139e8e1f9e7c4f8978_intitute-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Institute",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c914e233e11840add95b_organization-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Organization",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c9138d91055267249add_startup-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Startup",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c9144b2d70d8afc76026_studio-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Studio",
+      },
+      {
+        imageUrl:
+          "https://cdn.prod.website-files.com/638f532e7e769f0c4f3fbb53/6553c9148d4d499632b03b26_venture-logo-cargo-x-webflow-template.svg",
+        imageAlt: "Venture",
+      },
+    ];
+---
+
+<section class="contact-partners">
+  <div class="contact-partners__container">
+    <div class="contact-partners__heading">
+      <div class="contact-partners__title-block">
+        <p class="contact-partners__eyebrow">{data?.eyebrow || "Our partners"}</p>
+        <h2 class="contact-partners__title">{data?.title || "Brands & companies we worked with."}</h2>
+      </div>
+
+      <p class="contact-partners__text">
+        {
+          data?.text ||
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit tincidunt ut pellentesque dis massa elementum velit lacus et aenean."
+        }
+      </p>
+    </div>
+
+    <div class="contact-partners__divider"></div>
+
+    <div class="contact-partners__logos" aria-label="Partner logos">
+      {logos.map((logo) => {
+        const imageUrl = resolvePayloadOrFallbackUrl(logo?.image, logo?.imageUrl);
+        const imageAlt = resolvePayloadOrFallbackAlt(logo?.image, logo?.imageAlt, "Partner logo");
+
+        return (
+          <div class="contact-partners__logo">
+            {imageUrl && <img src={imageUrl} alt={imageAlt} loading="lazy" />}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

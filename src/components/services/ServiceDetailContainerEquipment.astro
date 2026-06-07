@@ -1,0 +1,49 @@
+---
+import CmsImage from "../shared/CmsImage.astro";
+import "../../assets/services/service-detail-page.css";
+
+const {
+  title = "Container Vessel Equipment",
+  lines = [],
+  features = [],
+  backgroundImage,
+} = Astro.props;
+
+const fallbackBackgroundImage =
+  "https://images.unsplash.com/photo-1518527989017-5baca7a58d3c?auto=format&fit=crop&w=1600&q=80";
+const resolvedBackgroundImage = backgroundImage || fallbackBackgroundImage;
+---
+
+<section class="service-detail-container-equipment">
+  <div class="service-detail-container-equipment__background" aria-hidden="true">
+    <CmsImage
+      src={resolvedBackgroundImage}
+      fallbackSrc={fallbackBackgroundImage}
+      alt=""
+      wrapperClass="service-detail-container-equipment__background-media"
+      class="service-detail-container-equipment__background-image"
+      placeholderLabel=""
+    />
+  </div>
+  <div class="service-detail-page__container service-detail-container-equipment__inner">
+    <div class="service-detail-container-equipment__copy">
+      <h2 class="service-detail-container-equipment__title">{title}</h2>
+      <div class="service-detail-container-equipment__text">
+        {lines.map((line) => <p>{line}</p>)}
+      </div>
+    </div>
+
+    <div class="service-detail-container-equipment__features">
+      {features.map((feature) => (
+        <article class="service-detail-container-equipment__feature">
+          <span class="service-detail-container-equipment__check" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="service-detail-container-equipment__check-svg">
+              <path d="m5.5 12.5 4.1 4.1 8.9-9.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <p class="service-detail-container-equipment__feature-text">{feature}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

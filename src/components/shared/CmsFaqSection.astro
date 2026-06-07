@@ -1,0 +1,58 @@
+---
+const {
+  items = [],
+} = Astro.props;
+---
+
+<section class="cms-faq-section">
+  <div class="cms-faq-section__container">
+    <div class="cms-faq-section__list">
+      {items.map((item: any, index: number) => (
+        <details class="cms-faq-section__item" open={index === 0}>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cms-faq-section {
+    padding: 0 20px 80px;
+  }
+
+  .cms-faq-section__container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .cms-faq-section__list {
+    display: grid;
+    gap: 16px;
+  }
+
+  .cms-faq-section__item {
+    border-radius: 22px;
+    background: #f4f7f9;
+    padding: 22px 24px;
+  }
+
+  .cms-faq-section__item summary {
+    cursor: pointer;
+    list-style: none;
+    color: #101820;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .cms-faq-section__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cms-faq-section__item p {
+    margin: 16px 0 0;
+    color: rgba(16, 24, 32, 0.78);
+    line-height: 1.75;
+  }
+</style>

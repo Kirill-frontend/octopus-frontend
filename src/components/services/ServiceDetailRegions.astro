@@ -1,0 +1,30 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+const {
+  intro = "",
+  regions = [],
+} = Astro.props;
+---
+
+<section class="service-detail-regions">
+  <div class="service-detail-page__container">
+    <div class="service-detail-regions__content">
+      <p class="service-detail-regions__intro">{intro}</p>
+
+      <div class="service-detail-regions__grid">
+        {regions.map((region) => (
+          <article class="service-detail-regions__card">
+            <span class="service-detail-regions__marker" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="service-detail-regions__marker-svg">
+                <path d="M12 21s6-6.14 6-11a6 6 0 1 0-12 0c0 4.86 6 11 6 11Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+              </svg>
+            </span>
+            <p class="service-detail-regions__label">{region}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

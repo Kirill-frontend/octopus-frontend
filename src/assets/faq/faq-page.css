@@ -1,0 +1,246 @@
+.faq-hero {
+  padding: 140px 20px 92px;
+  background: #f2f2f2;
+}
+
+.faq-hero__container,
+.faq-accordion-section__container {
+  width: min(100%, 1320px);
+  margin: 0 auto;
+}
+
+.faq-hero__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.faq-hero__eyebrow,
+.faq-accordion-section__eyebrow {
+  margin: 0;
+  color: #c5b883;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.faq-hero__title {
+  max-width: 760px;
+  margin: 0;
+  color: #040404;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.faq-accordion-section {
+  padding: 100px 20px 200px;
+  background: #ffffff;
+}
+
+.faq-accordion-section__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 57px;
+}
+
+.faq-accordion-section__intro {
+  width: min(100%, 633px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.faq-accordion-section__title {
+  margin: 0;
+  color: #040404;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 53.99px;
+}
+
+.faq-accordion-section__lead,
+.faq-accordion-section__body p {
+  margin: 0;
+  color: #757575;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30.01px;
+}
+
+.faq-accordion-section__body {
+  display: grid;
+  gap: 18px;
+}
+
+.faq-accordion-section__list {
+  width: 100%;
+  display: grid;
+  gap: 4px;
+}
+
+.faq-accordion-section__item {
+  background: rgba(242, 242, 242, 0.5);
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.faq-accordion-section__item[open] {
+  border-color: #00293a;
+}
+
+.faq-accordion-section__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 45px;
+  gap: 40px;
+  align-items: center;
+  padding: 55px 80px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-accordion-section__summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-accordion-section__question {
+  color: #040404;
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 50.01px;
+}
+
+.faq-accordion-section__item[open] .faq-accordion-section__question {
+  color: #00293a;
+}
+
+.faq-accordion-section__toggle {
+  width: 45px;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #00293a;
+  transform: rotate(90deg);
+  transition: transform 0.2s ease;
+}
+
+.faq-accordion-section__item[open] .faq-accordion-section__toggle {
+  transform: rotate(-90deg);
+}
+
+.faq-accordion-section__toggle-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.faq-accordion-section__answer {
+  margin: 0;
+  padding: 0 186px 55px 80px;
+  color: #757575;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30.01px;
+}
+
+@media (max-width: 991px) {
+  .faq-hero {
+    padding: 124px 20px 72px;
+  }
+
+  .faq-accordion-section {
+    padding: 88px 20px 140px;
+  }
+
+  .faq-accordion-section__container {
+    gap: 40px;
+  }
+
+  .faq-accordion-section__title {
+    font-size: 38px;
+    line-height: 1.2;
+  }
+
+  .faq-accordion-section__summary {
+    padding: 36px 32px;
+    gap: 24px;
+    grid-template-columns: minmax(0, 1fr) 36px;
+  }
+
+  .faq-accordion-section__question {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .faq-accordion-section__toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .faq-accordion-section__answer {
+    padding: 0 32px 36px;
+  }
+}
+
+@media (max-width: 479px) {
+  .faq-hero {
+    padding: 116px 16px 60px;
+  }
+
+  .faq-accordion-section {
+    padding: 72px 16px 110px;
+  }
+
+  .faq-accordion-section__intro {
+    gap: 16px;
+  }
+
+  .faq-hero__eyebrow,
+  .faq-accordion-section__eyebrow {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .faq-hero__title {
+    font-size: 42px;
+  }
+
+  .faq-accordion-section__title {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+
+  .faq-accordion-section__lead,
+  .faq-accordion-section__body p,
+  .faq-accordion-section__answer {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .faq-accordion-section__summary {
+    padding: 28px 20px;
+    gap: 18px;
+    grid-template-columns: minmax(0, 1fr) 28px;
+  }
+
+  .faq-accordion-section__question {
+    font-size: 23px;
+    line-height: 1.25;
+  }
+
+  .faq-accordion-section__toggle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .faq-accordion-section__answer {
+    padding: 0 20px 28px;
+  }
+}

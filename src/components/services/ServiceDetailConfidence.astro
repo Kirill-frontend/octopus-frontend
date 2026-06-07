@@ -1,0 +1,62 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+const {
+  title = "Professional Accountability",
+  body = "",
+  factsLabel = "This means:",
+  facts = [],
+  leftText = "Expertise",
+  centerText = "Insurance",
+  rightText = "True engineering confidence",
+  leftSymbol = "+",
+  rightSymbol = "=",
+  showContent = true,
+  showEquation = true,
+} = Astro.props;
+---
+
+<>
+  {
+    showContent && (title || body || facts.length > 0) && (
+      <section class="service-detail-confidence">
+        <div class="service-detail-page__container">
+          <div class="service-detail-confidence__copy">
+            {title && <h2 class="service-detail-confidence__title">{title}</h2>}
+            {body && <p class="service-detail-confidence__text">{body}</p>}
+          </div>
+
+          {facts.length > 0 && (
+            <div class="service-detail-confidence__facts">
+              <p class="service-detail-confidence__facts-label">{factsLabel}</p>
+              <ul class="service-detail-confidence__facts-list">
+                {facts.map((fact) => <li>{fact}</li>)}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    showEquation && (
+      <section class="service-detail-confidence-equation" aria-hidden="true">
+        <div class="service-detail-confidence-equation__track">
+          <div class="service-detail-confidence-equation__card service-detail-confidence-equation__card--dark service-detail-confidence-equation__card--expertise">
+            <span class="service-detail-confidence-equation__text">{leftText}</span>
+          </div>
+          <div class="service-detail-confidence-equation__card service-detail-confidence-equation__card--dark service-detail-confidence-equation__card--insurance">
+            <span class="service-detail-confidence-equation__text">{centerText}</span>
+          </div>
+          <div class="service-detail-confidence-equation__card service-detail-confidence-equation__card--gold service-detail-confidence-equation__card--result">
+            <span class="service-detail-confidence-equation__text">{rightText}</span>
+          </div>
+
+          <div class="service-detail-confidence-equation__symbol service-detail-confidence-equation__symbol--plus">{leftSymbol}</div>
+          <div class="service-detail-confidence-equation__symbol service-detail-confidence-equation__symbol--equals">{rightSymbol}</div>
+        </div>
+      </section>
+    )
+  }
+</>

@@ -1,0 +1,147 @@
+---
+import "../../assets/services/service-detail-hero.css";
+import { resolvePayloadApiUrl } from "../../lib/payload";
+
+const {
+  title = "Engineering Solutions",
+  subtitle = "Precision, accountability and safety coordinated through One Entry Point.",
+  image,
+  buttonLabel = "Receive a call",
+  serviceSlug = "",
+  serviceTitle = "",
+} = Astro.props;
+
+const leadEndpoint = resolvePayloadApiUrl("/api/leads");
+const resolvedServiceTitle = serviceTitle || title;
+const resolvedSubject = `${resolvedServiceTitle} request`;
+---
+
+<section class="service-detail-hero">
+  <div class="service-detail-hero__image-wrap" aria-hidden="true">
+    {
+      image && (
+        <img
+          src={image}
+          alt=""
+          class="service-detail-hero__image"
+          loading="eager"
+          fetchpriority="high"
+        />
+      )
+    }
+  </div>
+  <div class="service-detail-hero__overlay"></div>
+
+  <div class="service-detail-hero__container">
+    <div class="service-detail-hero__copy">
+      <h1 class="service-detail-hero__title">{title}</h1>
+      <p class="service-detail-hero__subtitle">{subtitle}</p>
+    </div>
+
+    <aside class="service-detail-hero__panel">
+      <form
+        class="service-detail-hero__form"
+        data-lead-form
+        data-lead-endpoint={leadEndpoint}
+        data-success-message="Your request has been received. We will contact you shortly."
+      >
+        <label class="service-detail-hero__field">
+          <span class="service-detail-hero__label">Full name</span>
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label class="service-detail-hero__field">
+          <span class="service-detail-hero__label">Email address</span>
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label class="service-detail-hero__field">
+          <span class="service-detail-hero__label">Phone number</span>
+          <input type="tel" name="phone" autocomplete="tel" />
+        </label>
+
+        <input type="hidden" name="submissionType" value="callback-request" />
+        <input type="hidden" name="serviceSlug" value={serviceSlug} />
+        <input type="hidden" name="serviceTitle" value={resolvedServiceTitle} />
+        <input type="hidden" name="subject" value={resolvedSubject} />
+
+        <button type="submit" class="service-detail-hero__button">{buttonLabel}</button>
+        <p class="service-detail-hero__form-status" data-lead-form-status aria-live="polite"></p>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<script>
+  const leadForms = document.querySelectorAll("[data-lead-form]");
+
+  const bindLeadForm = (form) => {
+    if (!(form instanceof HTMLFormElement) || form.dataset.leadBound === "true") return;
+
+    form.dataset.leadBound = "true";
+
+    const status = form.querySelector("[data-lead-form-status]");
+    const submitButton = form.querySelector('button[type="submit"]');
+    const endpoint = form.dataset.leadEndpoint;
+    const successMessage =
+      form.dataset.successMessage || "Your form has been submitted successfully.";
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!endpoint || !submitButton) return;
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-busy", "true");
+
+      if (status) {
+        status.textContent = "Sending...";
+        status.dataset.state = "pending";
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => null);
+
+        if (!response.ok || !result?.ok) {
+          throw new Error(result?.error || "Unable to submit the form.");
+        }
+
+        form.reset();
+
+        if (status) {
+          status.textContent = successMessage;
+          status.dataset.state = "success";
+        }
+      } catch (error) {
+        if (status) {
+          status.textContent =
+            error instanceof Error ? error.message : "Unable to submit the form.";
+          status.dataset.state = "error";
+        }
+      } finally {
+        submitButton.disabled = false;
+        submitButton.removeAttribute("aria-busy");
+      }
+    });
+  };
+
+  leadForms.forEach(bindLeadForm);
+</script>
+
+<style>
+  .service-detail-hero__image-wrap {
+    position: absolute;
+    inset: 0;
+    background: #0d2433;
+    overflow: hidden;
+  }
+</style>

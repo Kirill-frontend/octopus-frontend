@@ -1,0 +1,110 @@
+---
+import "../../assets/about/about-shared.css";
+import "../../assets/about/about-office.css";
+import {
+  resolveLinkHref,
+  resolvePayloadOrFallbackAlt,
+  resolvePayloadOrFallbackUrl,
+} from "../../lib/payload";
+
+const {
+  variant = "about",
+  data = {},
+} = Astro.props;
+
+const imageUrl = resolvePayloadOrFallbackUrl(data?.image, data?.imageUrl) || "/images/visit.jpg";
+const imageAlt = resolvePayloadOrFallbackAlt(data?.image, data?.imageAlt, "Our office");
+const details = Array.isArray(data?.details)
+  ? data.details
+  : [
+      {
+        label: "Email",
+        value: "corporateemail@gmail.com",
+        link: "mailto:corporateemail@gmail.com",
+      },
+      {
+        label: "Phone",
+        value: "(415) 000 - 0000",
+        link: "tel:+14150000000",
+      },
+    ];
+const visitHref = data?.visitLink ? resolveLinkHref(data.visitLink) : "/contact";
+const normalizeDetailValue = (value) =>
+  String(value ?? "")
+    .replace(/&bull;|&#8226;|&#x2022;/gi, "•")
+    .replace(/\r\n/g, "\n");
+---
+
+<section class:list={["about-office", `about-office--${variant}`]}>
+  <div class="about-office__container">
+    <div class="about-office__image-wrap">
+      <img
+        src={imageUrl}
+        alt={imageAlt}
+        class="about-office__image"
+      />
+    </div>
+
+    <article
+      class="about-office__card"
+      data-about-office-card={variant === "about" ? true : undefined}
+    >
+      <p class="about-eyebrow about-eyebrow--light">{data?.eyebrow || "Our office"}</p>
+      <h2 class="about-office__title">{data?.title || "Visit our location"}</h2>
+      <p class="about-office__text">
+        {
+          data?.text ||
+            "We operate from a strategic hub that connects major sea routes and logistics centers worldwide."
+        }
+      </p>
+
+      <div class="about-office__details">
+        {details.map((detail) => (
+          <div>
+            <div class="about-office__label">{detail?.label}</div>
+            {detail?.link ? (
+              <a href={detail.link} class="about-office__link">
+                {normalizeDetailValue(detail?.value)}
+              </a>
+            ) : (
+              <div class="about-office__link">{normalizeDetailValue(detail?.value)}</div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <a href={visitHref} class="about-office__visit-link">
+        <span>{data?.visitLink?.label || "Visit now"}</span>
+      </a>
+    </article>
+  </div>
+</section>
+
+<script>
+  const officeCard = document.querySelector("[data-about-office-card]");
+
+  if (officeCard && window.matchMedia("(min-width: 992px)").matches) {
+    let rafId = 0;
+
+    const updateParallax = () => {
+      rafId = 0;
+      const rect = officeCard.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const progress =
+        (viewportHeight - rect.top) / (viewportHeight + rect.height);
+      const offset = Math.max(-12, Math.min(12, (progress - 0.5) * 24));
+      officeCard.style.setProperty(
+        "--about-office-parallax",
+        `${offset.toFixed(2)}px`,
+      );
+    };
+
+    const requestTick = () => {
+      if (!rafId) rafId = window.requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", requestTick, { passive: true });
+    window.addEventListener("resize", requestTick);
+  }
+</script>

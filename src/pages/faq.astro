@@ -1,0 +1,31 @@
+---
+import FaqAccordionSection from "../components/faq/FaqAccordionSection.astro";
+import FaqHero from "../components/faq/FaqHero.astro";
+import Layout from "../layouts/Layout.astro";
+import { getFaqPage, getFooterData, getHeaderData, getSiteSettings } from "../lib/payload";
+import { richTextToParagraphs } from "../lib/richText";
+
+const [siteSettings, header, footer, faqPage] = await Promise.all([
+  getSiteSettings(),
+  getHeaderData(),
+  getFooterData(),
+  getFaqPage(),
+]);
+---
+
+<Layout
+  pageKey="faq"
+  headerBackground="#F2F2F2"
+  seo={faqPage?.seo}
+  siteSettings={siteSettings}
+  header={header}
+  footer={footer}
+>
+  <FaqHero title={faqPage?.title} />
+  <FaqAccordionSection
+    title={faqPage?.title}
+    lead={faqPage?.lead}
+    paragraphs={richTextToParagraphs(faqPage?.content)}
+    items={faqPage?.items ?? []}
+  />
+</Layout>

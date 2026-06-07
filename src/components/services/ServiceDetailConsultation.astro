@@ -1,0 +1,41 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+const {
+  title = "",
+  introTop = "",
+  introBottom = "",
+  rows = [],
+  outro = "",
+} = Astro.props;
+---
+
+<section class="service-detail-consultation">
+  <div class="service-detail-page__container">
+    {title && <h2 class="service-detail-consultation__title">{title}</h2>}
+
+    <div class="service-detail-consultation__intro">
+      <p>{introTop}</p>
+      <p>{introBottom}</p>
+    </div>
+
+    <div class="service-detail-consultation__rows">
+      {rows.map((row) => (
+        <div class="service-detail-consultation__row">
+          {row.cards?.map((card) => (
+            <article
+              class:list={[
+                "service-detail-consultation__card",
+                `service-detail-consultation__card--${card.tone}`,
+              ]}
+            >
+              <p class="service-detail-consultation__card-text">{card.text}</p>
+            </article>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    <p class="service-detail-consultation__outro">{outro}</p>
+  </div>
+</section>

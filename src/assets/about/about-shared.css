@@ -1,0 +1,55 @@
+.about-eyebrow {
+  margin: 0 0 16px;
+  color: #c7153b;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.about-eyebrow--light {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.about-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.about-button:hover {
+  transform: translateY(-2px);
+}
+
+.about-button--primary {
+  background: #c71539;
+  border: 1px solid #c71539;
+  color: #ffffff;
+}
+
+.about-button--secondary {
+  background: transparent;
+  border: 1px solid rgba(4, 4, 4, 0.18);
+  color: #040404;
+}
+
+.about-button--light {
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: #00293a;
+}
+
+.about-button--dark {
+  background: #c71539;
+  border: 1px solid #c71539;
+  color: #ffffff;
+}

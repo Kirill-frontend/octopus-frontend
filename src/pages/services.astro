@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AboutCta from "../components/about/AboutCta.astro";
+import ServicesHero from "../components/services/ServicesHero.astro";
+import ServicesGrid from "../components/services/ServicesGrid.astro";
+import {
+  getFooterData,
+  getHeaderData,
+  getServicesPage,
+  getSiteSettings,
+} from "../lib/payload";
+
+const [siteSettings, header, footer, servicesPage] = await Promise.all([
+  getSiteSettings(),
+  getHeaderData(),
+  getFooterData(),
+  getServicesPage(),
+]);
+---
+
+<Layout
+  pageKey="services"
+  headerBackground="#ffffff"
+  seo={servicesPage?.seo}
+  siteSettings={siteSettings}
+  header={header}
+  footer={footer}
+>
+  <ServicesHero data={servicesPage?.hero} title={servicesPage?.title || "A comprehensive set of services"} />
+  <ServicesGrid data={servicesPage?.valuesGrid} />
+  <AboutCta data={servicesPage?.cta} />
+</Layout>

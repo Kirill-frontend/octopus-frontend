@@ -1,0 +1,116 @@
+---
+const { items = [], formTitle } = Astro.props;
+---
+
+<section class="cms-contact-details">
+  <div class="cms-contact-details__container">
+    <div class="cms-contact-details__grid">
+      <div class="cms-contact-details__items">
+        {items.map((item: any) => (
+          <a href={item.link || "#"} class="cms-contact-details__item">
+            <span class="cms-contact-details__label">{item.label}</span>
+            <span class="cms-contact-details__value">{item.value}</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="cms-contact-details__panel">
+        <h2>{formTitle || "Request a quote"}</h2>
+        <form class="cms-contact-details__form">
+          <input type="text" name="name" placeholder="Full name" autocomplete="name" required />
+          <input type="email" name="email" placeholder="Email address" autocomplete="email" required />
+          <input type="tel" name="phone" placeholder="Phone number" autocomplete="tel" />
+          <input type="text" name="subject" placeholder="Subject" />
+          <textarea name="message" rows="5" placeholder="Please type your message here..."></textarea>
+          <button type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cms-contact-details {
+    padding: 0 20px 80px;
+  }
+
+  .cms-contact-details__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cms-contact-details__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 28px;
+  }
+
+  .cms-contact-details__items {
+    display: grid;
+    gap: 18px;
+    align-content: start;
+  }
+
+  .cms-contact-details__item,
+  .cms-contact-details__panel {
+    border-radius: 28px;
+    background: #f4f7f9;
+    padding: 28px;
+    text-decoration: none;
+  }
+
+  .cms-contact-details__label {
+    display: block;
+    margin-bottom: 8px;
+    color: #0e3b5b;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cms-contact-details__value {
+    color: #101820;
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+
+  .cms-contact-details__panel h2 {
+    margin: 0 0 18px;
+    font-size: 1.8rem;
+    color: #101820;
+  }
+
+  .cms-contact-details__form {
+    display: grid;
+    gap: 14px;
+  }
+
+  .cms-contact-details__form input,
+  .cms-contact-details__form textarea {
+    width: 100%;
+    border: 1px solid rgba(14, 59, 91, 0.16);
+    border-radius: 16px;
+    padding: 14px 16px;
+    font: inherit;
+    box-sizing: border-box;
+    background: #fff;
+  }
+
+  .cms-contact-details__form button {
+    border: 0;
+    border-radius: 999px;
+    padding: 15px 22px;
+    background: #0e3b5b;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .cms-contact-details__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

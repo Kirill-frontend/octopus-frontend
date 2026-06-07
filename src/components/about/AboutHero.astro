@@ -1,0 +1,73 @@
+---
+import "../../assets/about/about-shared.css";
+import "../../assets/about/about-hero.css";
+import {
+  resolveLinkHref,
+  resolvePayloadOrFallbackAlt,
+  resolvePayloadOrFallbackUrl,
+} from "../../lib/payload";
+
+const {
+  data = {},
+} = Astro.props;
+
+const stats = Array.isArray(data?.stats) ? data.stats : [];
+const heroImage = resolvePayloadOrFallbackUrl(data?.image, data?.imageUrl);
+const heroImageAlt = resolvePayloadOrFallbackAlt(
+  data?.image,
+  data?.imageAlt,
+  "Cargo company overview",
+);
+const primaryHref = data?.primaryAction ? resolveLinkHref(data.primaryAction) : "/contact";
+const secondaryHref = data?.secondaryAction ? resolveLinkHref(data.secondaryAction) : "#our-values";
+---
+
+<section class="about-hero">
+  <div class="about-hero__container">
+    <div class="about-hero__intro">
+      <div class="about-hero__copy">
+        <p class="about-eyebrow">{data?.eyebrow || "About us"}</p>
+        <h1 class="about-hero__title">{data?.title || "About Cargo company."}</h1>
+      </div>
+
+      <div class="about-hero__aside">
+        <p class="about-hero__description">
+          {
+            data?.description ||
+              "We combine logistics expertise, engineering support, and practical maritime knowledge to help complex cargo operations move with less friction and more confidence."
+          }
+        </p>
+        <div class="about-hero__actions">
+          <a href={primaryHref} class="about-button about-button--primary">
+            {data?.primaryAction?.label || "Join us"} <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a
+            href={secondaryHref}
+            class="about-button about-button--secondary"
+          >
+            {data?.secondaryAction?.label || "Our values"}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {
+      heroImage && (
+        <div class="about-hero__image-wrap">
+          <img src={heroImage} alt={heroImageAlt} class="about-hero__image" />
+        </div>
+      )
+    }
+
+    <div class="about-hero__stats">
+      {stats.map((stat) => (
+        <article class="about-stat-card">
+          <div class="about-stat-card__value">{stat?.value}</div>
+          <div class="about-stat-card__divider"></div>
+          <h2 class="about-stat-card__title">{stat?.title}</h2>
+          <p class="about-stat-card__text">{stat?.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

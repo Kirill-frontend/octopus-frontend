@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AboutHero from "../components/about/AboutHero.astro";
+import AboutStory from "../components/about/AboutStory.astro";
+import AboutValues from "../components/about/AboutValues.astro";
+import AboutTeam from "../components/about/AboutTeam.astro";
+import AboutCta from "../components/about/AboutCta.astro";
+import AboutOffice from "../components/about/AboutOffice.astro";
+import {
+  getAboutPage,
+  getFooterData,
+  getHeaderData,
+  getSiteSettings,
+} from "../lib/payload";
+
+const [siteSettings, header, footer, aboutPage] = await Promise.all([
+  getSiteSettings(),
+  getHeaderData(),
+  getFooterData(),
+  getAboutPage(),
+]);
+---
+
+<Layout pageKey="about" seo={aboutPage?.seo} siteSettings={siteSettings} header={header} footer={footer}>
+  <AboutHero data={aboutPage?.hero} />
+  <AboutStory data={aboutPage?.aboutStory} />
+  <AboutValues data={aboutPage?.values} />
+  <AboutOffice data={aboutPage?.office} />
+  <AboutTeam data={aboutPage?.team} />
+  <AboutCta data={aboutPage?.cta} />
+</Layout>

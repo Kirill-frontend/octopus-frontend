@@ -1,0 +1,53 @@
+---
+import "../../assets/about/about-shared.css";
+import "../../assets/about/about-cta.css";
+import {
+  resolveLinkHref,
+  resolvePayloadOrFallbackAlt,
+  resolvePayloadOrFallbackUrl,
+} from "../../lib/payload";
+
+const {
+  data,
+  title = "Ready to pull the trigger? Get a quote today.",
+  description = "Contact us for a personalized quote tailored to your needs.",
+  buttonLabel = "Get a quote",
+  buttonHref = "/contact",
+  showArrow = true,
+  image,
+  imageAlt = "Quote illustration",
+  variant = "default",
+} = Astro.props;
+
+const resolvedTitle = data?.title || title;
+const resolvedDescription = data?.description || description;
+const resolvedButtonLabel = data?.button?.label || buttonLabel;
+const resolvedButtonHref = data?.button ? resolveLinkHref(data.button) : buttonHref;
+const resolvedShowArrow = data?.showArrow ?? showArrow;
+const resolvedVariant = data?.variant || variant;
+const resolvedImage = resolvePayloadOrFallbackUrl(data?.image, data?.imageUrl) || image;
+const resolvedImageAlt = resolvePayloadOrFallbackAlt(data?.image, data?.imageAlt, imageAlt);
+---
+
+<section class:list={["about-cta", `about-cta--${resolvedVariant}`]}>
+  <div class="about-cta__container">
+    <div class="about-cta__content">
+      <div class="about-cta__copy">
+        <h2 class="about-cta__title">{resolvedTitle}</h2>
+        <p class="about-cta__description">{resolvedDescription}</p>
+      </div>
+      <div class="about-cta__action">
+        <a href={resolvedButtonHref} class="about-button about-button--dark">
+          {resolvedButtonLabel} {resolvedShowArrow && <span aria-hidden="true">&rarr;</span>}
+        </a>
+      </div>
+    </div>
+    {
+      resolvedImage && (
+        <div class="about-cta__image-wrap" aria-hidden="true">
+          <img src={resolvedImage} alt={resolvedImageAlt} class="about-cta__image" loading="lazy" />
+        </div>
+      )
+    }
+  </div>
+</section>

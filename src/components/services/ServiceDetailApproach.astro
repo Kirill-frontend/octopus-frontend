@@ -1,0 +1,113 @@
+---
+import CmsImage from "../shared/CmsImage.astro";
+import "../../assets/services/service-detail-page.css";
+
+const {
+  topTitle = "Our Approach",
+  topText = "",
+  backgroundImage,
+  reviewLabel = "We review:",
+  reviewItems = [],
+  includedTitle = "What is Included",
+  includedSubtitle = "Free",
+  includedItems = [],
+  excludedTitle = "What is Not Included",
+  excludedSubtitle = "Paid Services",
+  excludedItems = [],
+  bottomLabel = "",
+  bottomItems = [],
+  bottomTitle = "",
+  bottomText = "",
+} = Astro.props;
+---
+
+<section class="service-detail-approach">
+  <div class="service-detail-approach__top">
+    <div class="service-detail-approach__intro">
+      <div class="service-detail-approach__intro-copy">
+        <h2 class="service-detail-approach__title">{topTitle}</h2>
+        <p class="service-detail-approach__subtitle">{topText}</p>
+      </div>
+    </div>
+
+    <div class="service-detail-approach__review">
+      <p class="service-detail-approach__review-label">{reviewLabel}</p>
+      <div class="service-detail-approach__review-list">
+        {reviewItems.map((item) => (
+          <div class="service-detail-approach__review-item">
+            <span class="service-detail-approach__bullet" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="service-detail-approach__bullet-svg">
+                <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="service-detail-approach__middle">
+    {
+      backgroundImage && (
+        <div class="service-detail-approach__middle-background" aria-hidden="true">
+          <CmsImage
+            src={backgroundImage}
+            alt=""
+            wrapperClass="service-detail-approach__middle-background-media"
+            class="service-detail-approach__middle-background-image"
+            placeholderLabel=""
+          />
+        </div>
+      )
+    }
+    <div class="service-detail-approach__included">
+      <div class="service-detail-approach__included-card service-detail-approach__included-card--light">
+        <div class="service-detail-approach__included-head">
+          <h3>{includedTitle}</h3>
+          <p>{includedSubtitle}</p>
+        </div>
+        <div class="service-detail-approach__included-copy">
+          {includedItems.map((item) => <p>{item}</p>)}
+        </div>
+      </div>
+
+      <div class="service-detail-approach__included-card service-detail-approach__included-card--dark">
+        <div class="service-detail-approach__included-head">
+          <h3>{excludedTitle}</h3>
+          <p>{excludedSubtitle}</p>
+        </div>
+        <div class="service-detail-approach__included-copy">
+          {excludedItems.map((item) => <p>{item}</p>)}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-detail-approach__bottom">
+    <div class="service-detail-approach__services">
+      <p class="service-detail-approach__services-label">{bottomLabel}</p>
+      <div class="service-detail-approach__services-list">
+        {bottomItems.map((item) => (
+          <div class="service-detail-approach__services-item">
+            <span class="service-detail-approach__bullet" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="service-detail-approach__bullet-svg">
+                <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="service-detail-approach__entry">
+      <div class="service-detail-approach__entry-copy">
+        <h2>{bottomTitle}</h2>
+        <p>{bottomText}</p>
+      </div>
+    </div>
+  </div>
+</section>

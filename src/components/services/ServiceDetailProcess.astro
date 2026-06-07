@@ -1,0 +1,28 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+const {
+  title = "How we work",
+  steps = [],
+} = Astro.props;
+---
+
+<section class="service-detail-process">
+  <div class="service-detail-page__container">
+    <h2 class="service-detail-process__title">{title}</h2>
+
+    <div class="service-detail-process__stack">
+      {steps.map((step, index) => (
+        <article class:list={["service-detail-process__panel", `service-detail-process__panel--step-${index + 1}`]}>
+          <div class="service-detail-process__number">{step.number}</div>
+          <div class="service-detail-process__content">
+            <h3 class="service-detail-process__card-title">{step.title}</h3>
+            <p class="service-detail-process__card-text">{step.text}</p>
+          </div>
+        </article>
+      ))}
+      <div class="service-detail-process__divider service-detail-process__divider--first" aria-hidden="true"></div>
+      <div class="service-detail-process__divider service-detail-process__divider--second" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>

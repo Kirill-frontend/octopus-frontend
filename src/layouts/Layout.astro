@@ -1,15 +1,85 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { resolveSeoMeta } from "../lib/seo";
+import "../assets/style.css";
+import { resolvePayloadMediaUrl } from "../lib/payload";
+
+const {
+  headerBackground = "transparent",
+  headerIsOpaque = true,
+  pageKey,
+  seo = {},
+  siteSettings,
+  header,
+  footer,
+} = Astro.props;
+
+const seoMeta = resolveSeoMeta(
+  pageKey,
+  {
+    title: seo?.metaTitle ?? seo?.title,
+    description: seo?.metaDescription ?? seo?.description,
+    canonicalUrl: seo?.canonicalUrl,
+    robots: seo?.robots,
+    ogTitle: seo?.ogTitle,
+    ogDescription: seo?.ogDescription,
+    ogImage: resolvePayloadMediaUrl(seo?.ogImage),
+    faviconSvg: resolvePayloadMediaUrl(seo?.faviconSvgOverride),
+    faviconIco: resolvePayloadMediaUrl(seo?.faviconIcoOverride),
+    appleTouchIcon: resolvePayloadMediaUrl(seo?.appleTouchIconOverride),
+  },
+  Astro.url.pathname,
+  {
+    siteName: siteSettings?.siteName,
+    defaultTitle: siteSettings?.defaultTitle,
+    titleTemplate: siteSettings?.titleTemplate,
+    defaultDescription: siteSettings?.defaultDescription,
+    siteUrl: siteSettings?.siteUrl,
+    defaultRobots: siteSettings?.defaultRobots,
+    themeColor: siteSettings?.themeColor,
+    locale: siteSettings?.locale,
+    faviconSvg: resolvePayloadMediaUrl(siteSettings?.faviconSvg) || "/favicon.svg",
+    faviconIco: resolvePayloadMediaUrl(siteSettings?.faviconIco) || "/favicon.ico",
+    appleTouchIcon:
+      resolvePayloadMediaUrl(siteSettings?.appleTouchIcon) ||
+      resolvePayloadMediaUrl(siteSettings?.faviconSvg) ||
+      "/favicon.svg",
+    defaultOgImage: resolvePayloadMediaUrl(siteSettings?.defaultOgImage) || "",
+  },
+);
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="description" content={seoMeta.description} />
+		<meta name="robots" content={seoMeta.robots} />
+		<meta name="theme-color" content={seoMeta.themeColor} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={seoMeta.siteName} />
+		<meta property="og:locale" content={seoMeta.locale} />
+		<meta property="og:title" content={seoMeta.ogTitle} />
+		<meta property="og:description" content={seoMeta.ogDescription} />
+		{seoMeta.canonicalUrl && <meta property="og:url" content={seoMeta.canonicalUrl} />}
+		{seoMeta.ogImage && <meta property="og:image" content={seoMeta.ogImage} />}
+		<meta name="twitter:card" content={seoMeta.twitterCard} />
+		<meta name="twitter:title" content={seoMeta.ogTitle} />
+		<meta name="twitter:description" content={seoMeta.ogDescription} />
+		{seoMeta.ogImage && <meta name="twitter:image" content={seoMeta.ogImage} />}
+		{seoMeta.canonicalUrl && <link rel="canonical" href={seoMeta.canonicalUrl} />}
+		<link rel="icon" type="image/svg+xml" href={seoMeta.faviconSvg} />
+		<link rel="icon" href={seoMeta.faviconIco} sizes="any" />
+		<link rel="apple-touch-icon" href={seoMeta.appleTouchIcon} />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{seoMeta.title}</title>
 	</head>
 	<body>
+		<Header isOpaque={headerIsOpaque} background={headerBackground} data={header} />
 		<slot />
+		<Footer data={footer} />
 	</body>
 </html>
 
@@ -19,5 +89,26 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		background: #fff;
+		font-family: Onest, sans-serif;
+		animation: page-enter 0.7s ease-out;
+	}
+
+	@keyframes page-enter {
+		from {
+			opacity: 0;
+			transform: translateY(12px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		body {
+			animation: none;
+		}
 	}
 </style>

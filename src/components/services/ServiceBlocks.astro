@@ -1,0 +1,277 @@
+---
+import { resolvePayloadMediaAlt, resolvePayloadMediaUrl } from "../../lib/payload";
+import { richTextToParagraphs } from "../../lib/richText";
+import AboutCta from "../about/AboutCta.astro";
+import AboutOffice from "../about/AboutOffice.astro";
+import ServiceDetailApproach from "./ServiceDetailApproach.astro";
+import ServiceDetailApproachSplit from "./ServiceDetailApproachSplit.astro";
+import ServiceDetailConfidence from "./ServiceDetailConfidence.astro";
+import ServiceDetailConsultation from "./ServiceDetailConsultation.astro";
+import ServiceDetailContainerEquipment from "./ServiceDetailContainerEquipment.astro";
+import ServiceDetailFeatureHighlightSplit from "./ServiceDetailFeatureHighlightSplit.astro";
+import ServiceDetailHero from "./ServiceDetailHero.astro";
+import ServiceDetailIntroBadge from "./ServiceDetailIntroBadge.astro";
+import ServiceDetailOverview from "./ServiceDetailOverview.astro";
+import ServiceDetailOverlayInfoPanel from "./ServiceDetailOverlayInfoPanel.astro";
+import ServiceDetailPortCaptainIntro from "./ServiceDetailPortCaptainIntro.astro";
+import ServiceDetailProcess from "./ServiceDetailProcess.astro";
+import ServiceDetailProduction from "./ServiceDetailProduction.astro";
+import ServiceDetailRegions from "./ServiceDetailRegions.astro";
+import ServiceDetailReasons from "./ServiceDetailReasons.astro";
+import ServiceDetailStructures from "./ServiceDetailStructures.astro";
+import ServiceDetailSupportSplit from "./ServiceDetailSupportSplit.astro";
+import ServiceDetailSupply from "./ServiceDetailSupply.astro";
+import ServiceDetailTextareaList from "./ServiceDetailTextareaList.astro";
+import ServiceDetailTitleChecklistSplit from "./ServiceDetailTitleChecklistSplit.astro";
+import ServiceDetailWorkflow from "./ServiceDetailWorkflow.astro";
+
+const { blocks = [], servicePage } = Astro.props;
+--- 
+
+{
+  blocks.map((block) => {
+    switch (block.blockType) {
+      case "serviceHero":
+        return (
+          <ServiceDetailHero
+            title={block.title}
+            subtitle={block.subtitle}
+            image={resolvePayloadMediaUrl(block.image)}
+            buttonLabel={block.buttonLabel}
+            serviceSlug={servicePage?.slug}
+            serviceTitle={servicePage?.title ?? block.title}
+          />
+        );
+      case "overviewSplit":
+        return (
+          <ServiceDetailOverview
+            introParagraphs={richTextToParagraphs(block.introText)}
+            introImage={resolvePayloadMediaUrl(block.introImage)}
+            introImageAlt={resolvePayloadMediaAlt(block.introImage, block.sectionTitle)}
+            sectionTitle={block.sectionTitle}
+            deliverables={block.deliverables?.map((item) => item.text) ?? []}
+            outroParagraphs={richTextToParagraphs(block.outroText)}
+            detailImage={resolvePayloadMediaUrl(block.detailImage)}
+            detailImageAlt={resolvePayloadMediaAlt(block.detailImage, block.sectionTitle)}
+          />
+        );
+      case "confidenceSection":
+        return (
+          <ServiceDetailConfidence
+            title={block.title}
+            body={block.body}
+            factsLabel={block.factsLabel}
+            facts={block.facts?.map((item) => item.text) ?? []}
+            showEquation={false}
+          />
+        );
+      case "equationStrip":
+        return (
+          <ServiceDetailConfidence
+            leftText={block.leftText}
+            centerText={block.centerText}
+            rightText={block.rightText}
+            leftSymbol={block.leftSymbol}
+            rightSymbol={block.rightSymbol}
+            showContent={false}
+          />
+        );
+      case "reasonsGrid":
+        return (
+          <ServiceDetailReasons
+            title={block.title}
+            subtitle={block.subtitle}
+            reasonsTop={block.topItems?.map((item) => item.text) ?? []}
+            reasonsBottom={block.bottomItems?.map((item) => item.text) ?? []}
+          />
+        );
+      case "processSteps":
+        return <ServiceDetailProcess title={block.title} steps={block.steps ?? []} />;
+      case "regionsGrid":
+        return (
+          <ServiceDetailRegions
+            intro={block.intro}
+            regions={block.regions?.map((item) => item.text) ?? []}
+          />
+        );
+      case "supplyCards":
+        return (
+          <ServiceDetailSupply
+            title={block.title}
+            cards={
+              block.cards?.map((card) => ({
+                title: card.title,
+                lines: card.lines?.map((line) => line.text) ?? [],
+              })) ?? []
+            }
+          />
+        );
+      case "containerEquipment":
+        return (
+          <ServiceDetailContainerEquipment
+            title={block.title}
+            lines={block.lines?.map((item) => item.text) ?? []}
+            features={block.features?.map((item) => item.text) ?? []}
+            backgroundImage={resolvePayloadMediaUrl(block.backgroundImage ?? block.image)}
+          />
+        );
+      case "workflowAlternating":
+        return (
+          <ServiceDetailWorkflow
+            title={block.title}
+            steps={
+              block.steps?.map((step) => ({
+                ...step,
+                image: resolvePayloadMediaUrl(step.image),
+              })) ?? []
+            }
+          />
+        );
+      case "structuresCards":
+        return (
+          <ServiceDetailStructures
+            introTop={block.introTop}
+            introBottom={block.introBottom}
+            cards={block.cards ?? []}
+            outro={block.outro}
+          />
+        );
+      case "productionComposite":
+        return (
+          <ServiceDetailProduction
+            title={block.title}
+            cards={block.cards?.map((item) => item.text) ?? []}
+            complianceItems={block.complianceItems?.map((item) => item.text) ?? []}
+            backgroundImage={resolvePayloadMediaUrl(block.backgroundImage ?? block.image)}
+          />
+        );
+      case "consultationGrid":
+        return <ServiceDetailConsultation {...block} />;
+      case "serviceOffice":
+        return (
+          <AboutOffice
+            variant="contact"
+            data={{
+              eyebrow: block.eyebrow,
+              title: block.title,
+              text: block.text,
+              image: block.image,
+              imageUrl: block.imageUrl,
+              imageAlt: block.imageAlt,
+              details: block.details,
+              visitLink:
+                block.buttonLabel || block.buttonUrl
+                  ? {
+                      label: block.buttonLabel || "Visit now",
+                      type: "custom",
+                      url: block.buttonUrl || "/contact",
+                    }
+                  : undefined,
+            }}
+          />
+        );
+      case "approachComposite":
+        return (
+          <ServiceDetailApproach
+            topTitle={block.topTitle}
+            topText={block.topText}
+            backgroundImage={resolvePayloadMediaUrl(block.backgroundImage ?? block.image)}
+            reviewLabel={block.reviewLabel}
+            reviewItems={block.reviewItems?.map((item) => item.text) ?? []}
+            includedTitle={block.includedTitle}
+            includedSubtitle={block.includedSubtitle}
+            includedItems={block.includedItems?.map((item) => item.text) ?? []}
+            excludedTitle={block.excludedTitle}
+            excludedSubtitle={block.excludedSubtitle}
+            excludedItems={block.excludedItems?.map((item) => item.text) ?? []}
+            bottomLabel={block.bottomLabel}
+            bottomItems={block.bottomItems?.map((item) => item.text) ?? []}
+            bottomTitle={block.bottomTitle}
+            bottomText={block.bottomText}
+          />
+        );
+      case "richTextIntro":
+        return (
+          <ServiceDetailPortCaptainIntro
+            paragraphs={
+              block.paragraphs?.flatMap((item) => richTextToParagraphs(item.content)) ?? []
+            }
+          />
+        );
+      case "overlayInfoPanel":
+        return (
+          <ServiceDetailOverlayInfoPanel
+            title={block.title}
+            subtitle={block.subtitle}
+            backgroundImage={resolvePayloadMediaUrl(block.backgroundImage ?? block.image)}
+            introText={block.introText}
+            services={block.services?.map((item) => item.text) ?? []}
+            outroText={block.outroText}
+          />
+        );
+      case "supportSplit":
+        return (
+          <ServiceDetailSupportSplit
+            leftLabel={block.leftLabel}
+            leftItems={block.leftItems?.map((item) => item.text) ?? []}
+            rightTitle={block.rightTitle}
+            rightText={block.rightText}
+          />
+        );
+      case "featureHighlightSplit":
+        return (
+          <ServiceDetailFeatureHighlightSplit
+            title={block.title}
+            introText={block.introText}
+            highlights={block.highlights?.map((item) => item.text) ?? []}
+          />
+        );
+      case "approachSplit":
+        return (
+          <ServiceDetailApproachSplit
+            title={block.title}
+            text={block.text}
+            label={block.label}
+            items={block.items?.map((item) => item.text) ?? []}
+          />
+        );
+      case "introBadge":
+        return (
+          <ServiceDetailIntroBadge
+            introText={block.introText}
+            badgeText={block.badgeText}
+          />
+        );
+      case "titleChecklistSplit":
+        return (
+          <ServiceDetailTitleChecklistSplit
+            title={block.title}
+            items={block.items?.map((item) => item.text) ?? []}
+            backgroundImage={resolvePayloadMediaUrl(block.backgroundImage ?? block.image)}
+          />
+        );
+      case "ctaBanner":
+        return (
+          <AboutCta
+            variant={block.darkMode ? "service" : "default"}
+            title={block.title}
+            description={block.description}
+            buttonLabel={block.buttonLabel}
+            buttonHref={block.buttonUrl}
+            image="/images/cta.jpg"
+            imageAlt="Octopus Group team at work"
+            showArrow={false}
+          />
+        );
+      case "textareaList":
+        return (
+          <ServiceDetailTextareaList
+            title={block.title}
+            items={block.items?.map((item) => item.text) ?? []}
+          />
+        );
+      default:
+        return null;
+    }
+  })
+}

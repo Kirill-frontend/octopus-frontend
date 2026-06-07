@@ -1,0 +1,43 @@
+---
+const {
+  paragraphs = [],
+  title,
+} = Astro.props;
+---
+
+<section class="cms-rich-text-section">
+  <div class="cms-rich-text-section__container">
+    {title && <h2 class="cms-rich-text-section__title">{title}</h2>}
+    <div class="cms-rich-text-section__content">
+      {paragraphs.map((paragraph: string) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cms-rich-text-section {
+    padding: 0 20px 80px;
+  }
+
+  .cms-rich-text-section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cms-rich-text-section__title {
+    margin: 0 0 20px;
+    color: #101820;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+  }
+
+  .cms-rich-text-section__content {
+    max-width: 820px;
+    color: rgba(16, 24, 32, 0.82);
+    font-size: 1.04rem;
+    line-height: 1.85;
+  }
+
+  .cms-rich-text-section__content p {
+    margin: 0 0 18px;
+  }
+</style>

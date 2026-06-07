@@ -1,0 +1,13 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+const {
+  paragraphs = [],
+} = Astro.props;
+---
+
+<section class="service-detail-port-captain-intro">
+  <div class="service-detail-page__container">
+    {paragraphs.map((paragraph) => <p class="service-detail-port-captain-intro__text">{paragraph}</p>)}
+  </div>
+</section>

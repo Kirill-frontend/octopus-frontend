@@ -1,0 +1,77 @@
+.about-team {
+  padding: 40px 0 120px;
+  background: #ffffff;
+}
+
+.about-team__container {
+  width: min(100%, 1248px);
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.about-team__intro {
+  max-width: 620px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.about-team__title {
+  margin: 0;
+  color: #040404;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.08;
+}
+
+.about-team__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.about-team-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.about-team-card__content {
+  padding-top: 18px;
+}
+
+.about-team-card__name {
+  margin: 0 0 8px;
+  color: #040404;
+  font-size: 24px;
+}
+
+.about-team-card__role {
+  margin: 0;
+  color: #c7153b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 991px) {
+  .about-team {
+    padding: 56px 0 88px;
+  }
+
+  .about-team__container {
+    padding: 0 20px;
+  }
+
+  .about-team__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 479px) {
+  .about-team__container {
+    padding: 0 16px;
+  }
+}

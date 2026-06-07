@@ -1,0 +1,79 @@
+---
+import "../../assets/about/about-shared.css";
+import "../../assets/about/about-story.css";
+import {
+  extractLexicalText,
+  resolveLinkHref,
+  resolvePayloadOrFallbackAlt,
+  resolvePayloadOrFallbackUrl,
+} from "../../lib/payload";
+
+const {
+  data = {},
+} = Astro.props;
+
+const imageUrl = resolvePayloadOrFallbackUrl(data?.image, data?.imageUrl);
+const imageAlt = resolvePayloadOrFallbackAlt(data?.image, data?.imageAlt, "Our story");
+const bodyText =
+  extractLexicalText(data?.body) ||
+  "Netus in commodo egestas tristique augue sit odio lorem tortor facilisis in pharetra nisi leo semper in suscipit risus eu accumsan, sem proin tellus at et nisl amet morbi.";
+const ctaHref = data?.cta ? resolveLinkHref(data.cta) : "/contact";
+---
+
+<section class="about-story">
+  <div class="about-story__container">
+    <div class="about-story__panel" aria-hidden="true"></div>
+
+    {
+      imageUrl && (
+        <div class="about-story__media" data-about-story-media>
+          <img src={imageUrl} alt={imageAlt} class="about-story__image" />
+        </div>
+      )
+    }
+
+    <div class="about-story__content">
+      <div class="about-story__content-inner">
+        <p class="about-eyebrow about-eyebrow--light">{data?.eyebrow || "Our story"}</p>
+        <h2 class="about-story__title">
+          {data?.title || "The story of how our company was founded"}
+        </h2>
+        <p class="about-story__text">
+          {bodyText}
+        </p>
+        <a href={ctaHref} class="about-button about-button--primary">
+          {data?.cta?.label || "CTA"}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const media = document.querySelector("[data-about-story-media]");
+
+  if (media && window.matchMedia("(min-width: 992px)").matches) {
+    let rafId = 0;
+
+    const updateParallax = () => {
+      rafId = 0;
+      const rect = media.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const progress =
+        (viewportHeight - rect.top) / (viewportHeight + rect.height);
+      const offset = Math.max(-18, Math.min(18, (progress - 0.5) * 36));
+      media.style.setProperty(
+        "--about-story-parallax",
+        `${offset.toFixed(2)}px`,
+      );
+    };
+
+    const requestTick = () => {
+      if (!rafId) rafId = window.requestAnimationFrame(updateParallax);
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", requestTick, { passive: true });
+    window.addEventListener("resize", requestTick);
+  }
+</script>

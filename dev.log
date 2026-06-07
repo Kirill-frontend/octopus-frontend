@@ -1,0 +1,17 @@
+
+> octopus-frontend@0.0.1 dev
+> astro dev
+
+[vite] connected.
+[2m17:45:33[22m [34m[types][39m Generated [2m4ms[22m
+[2m17:45:33[22m [34m[vite][39m Port 4321 is in use, trying another one...
+[2m17:45:33[22m [34m[vite][39m Port 4322 is in use, trying another one...
+[42m[1m astro [22m[49m [32mv6.3.1[39m [2mready in[22m 3783 [2mms[22m
+[2m┃[22m Local    [36mhttp://localhost:4323/[39m
+[2m┃[22m Network  [2muse --host to expose[22m
+[2m17:45:33[22m [32mwatching for file changes...[39m
+[2m11:32:31[22m [34m[200][39m /services/engineering-solutions [2m439ms[22m
+[2m11:59:15[22m [34m[vite][39m [32m.env changed, restarting server...[39m
+[vite] connected.
+[2m11:59:23[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m11:59:24[22m [34m[vite][39m server restarted.

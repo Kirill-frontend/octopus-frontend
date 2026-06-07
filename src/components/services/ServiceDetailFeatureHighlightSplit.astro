@@ -1,0 +1,34 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+interface Props {
+  title: string;
+  introText: string;
+  highlights?: string[];
+}
+
+const { title, introText, highlights = [] } = Astro.props as Props;
+---
+
+<section class="service-detail-feature-highlight">
+  <div class="service-detail-feature-highlight__stage">
+    <div class="service-detail-feature-highlight__copy">
+      <h2 class="service-detail-feature-highlight__title">{title}</h2>
+      <p class="service-detail-feature-highlight__text">{introText}</p>
+    </div>
+
+    <div class="service-detail-feature-highlight__panel">
+      {highlights.map((item) => (
+        <div class="service-detail-feature-highlight__item">
+          <span class="service-detail-feature-highlight__bullet" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="service-detail-feature-highlight__bullet-svg">
+              <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+              <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <p>{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

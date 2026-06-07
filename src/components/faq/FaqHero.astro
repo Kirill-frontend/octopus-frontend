@@ -1,0 +1,16 @@
+---
+import "../../assets/faq/faq-page.css";
+
+const { title } = Astro.props;
+const normalizedTitle =
+  title && title.trim() && title.trim().toUpperCase() !== "FAQ"
+    ? title.trim()
+    : "Frequently asked questions";
+---
+
+<section class="faq-hero">
+  <div class="faq-hero__container">
+    <p class="faq-hero__eyebrow">FAQ/</p>
+    <h1 class="faq-hero__title">{normalizedTitle}</h1>
+  </div>
+</section>

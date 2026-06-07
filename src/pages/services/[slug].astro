@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceBlocks from "../../components/services/ServiceBlocks.astro";
+import {
+  getFooterData,
+  getHeaderData,
+  getServicePageBySlug,
+  getServicePages,
+  getSiteSettings,
+} from "../../lib/payload";
+
+export async function getStaticPaths() {
+  const servicePages = await getServicePages();
+
+  return (servicePages?.docs ?? []).map((servicePage) => ({
+    params: { slug: servicePage.slug },
+    props: { servicePage },
+  }));
+}
+
+const [siteSettings, header, footer, pageData] = await Promise.all([
+  getSiteSettings(),
+  getHeaderData(),
+  getFooterData(),
+  getServicePageBySlug(Astro.params.slug || ""),
+]);
+---
+
+<Layout
+  pageKey="service"
+  headerBackground="transparent"
+  headerIsOpaque={false}
+  seo={pageData?.seo}
+  siteSettings={siteSettings}
+  header={header}
+  footer={footer}
+>
+  <ServiceBlocks blocks={pageData?.blocks ?? []} servicePage={pageData} />
+</Layout>

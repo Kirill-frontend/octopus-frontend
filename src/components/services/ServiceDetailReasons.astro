@@ -1,0 +1,56 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+const {
+  title = "Why Octopus Group",
+  subtitle = "",
+  reasonsTop = [],
+  reasonsBottom = [],
+} = Astro.props;
+
+const bottomRowClass =
+  reasonsBottom.length >= 3
+    ? "service-detail-reasons__row--bottom-three"
+    : reasonsBottom.length === 1
+      ? "service-detail-reasons__row--bottom-single"
+      : "service-detail-reasons__row--bottom";
+---
+
+<section class="service-detail-reasons">
+  <div class="service-detail-page__container">
+    <h2 class="service-detail-reasons__title">{title}</h2>
+    {subtitle && <p class="service-detail-reasons__subtitle">{subtitle}</p>}
+
+    <div class="service-detail-reasons__rows">
+      <div class="service-detail-reasons__row service-detail-reasons__row--top">
+        {reasonsTop.map((reason) => (
+          <article class="service-detail-reasons__card service-detail-reasons__card--top">
+            <span class="service-detail-reasons__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="service-detail-reasons__icon-svg">
+                <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <p class="service-detail-reasons__card-text">{reason}</p>
+          </article>
+        ))}
+      </div>
+
+      {reasonsBottom.length > 0 && (
+        <div class:list={["service-detail-reasons__row", bottomRowClass]}>
+          {reasonsBottom.map((reason) => (
+            <article class="service-detail-reasons__card service-detail-reasons__card--bottom">
+              <span class="service-detail-reasons__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="service-detail-reasons__icon-svg">
+                  <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                  <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <p class="service-detail-reasons__card-text">{reason}</p>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

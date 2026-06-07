@@ -1,0 +1,81 @@
+---
+import "../../assets/services/services-grid.css";
+
+const {
+  data = {},
+} = Astro.props;
+
+const values = Array.isArray(data?.items)
+  ? data.items
+  : [
+      {
+        title: "Quality",
+        text: "We uphold the highest standards in every operation - from cargo handling to documentation - ensuring reliability and safety throughout.",
+      },
+      {
+        title: "Commitment",
+        text: "Every delivery is a promise. We stay dedicated to meeting deadlines and maintaining transparent communication at every stage.",
+      },
+      {
+        title: "Teamwork",
+        text: "Strong collaboration between our experts, partners, and clients allows us to solve challenges swiftly and effectively.",
+      },
+      {
+        title: "Innovation",
+        text: "We embrace modern technology and smarter logistics solutions to make global shipping faster, safer, and more efficient.",
+      },
+      {
+        title: "Leadership",
+        text: "With years of experience and deep industry knowledge, we guide our clients confidently through the complexities of international trade.",
+      },
+      {
+        title: "Openness",
+        text: "We believe in honest partnerships, open dialogue, and full visibility - building trust that lasts beyond a single voyage.",
+      },
+    ];
+---
+
+<section class="services-grid">
+  <div class="services-grid__container">
+    <div class="services-grid__heading">
+      <div class="services-grid__title-block">
+        <p class="services-grid__eyebrow">{data?.eyebrow || "OUR VALUES/"}</p>
+        <h2 class="services-grid__title">{data?.title || "The values that drive everything we do."}</h2>
+      </div>
+
+      <p class="services-grid__text">
+        {data?.text || "Our success at sea and on land is built on principles that guide every shipment, partnership, and decision."}
+      </p>
+    </div>
+
+    <div class="services-grid__cards">
+      {values.map((value) => (
+        <article class="services-grid__card">
+          <span class="services-grid__card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="services-grid__card-icon-svg">
+              <path
+                d="M12 4.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              />
+              <path
+                d="M8.8 12.6V18l3.2-1.8 3.2 1.8v-5.4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+
+          <div class="services-grid__card-body">
+            <h3 class="services-grid__card-title">{value.title}</h3>
+            <p class="services-grid__card-text">{value.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

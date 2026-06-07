@@ -1,0 +1,57 @@
+---
+import "../../assets/services/service-detail-page.css";
+import CmsImage from "../shared/CmsImage.astro";
+
+const {
+  introParagraphs = [],
+  introImage,
+  introImageAlt = "Service overview image",
+  sectionTitle = "What we deliver",
+  deliverables = [],
+  outroParagraphs = [],
+  detailImage,
+  detailImageAlt = "Service detail image",
+} = Astro.props;
+---
+
+<section class="service-detail-overview">
+  <div class="service-detail-page__container">
+    <div class="service-detail-overview__intro">
+      <div class="service-detail-overview__copy-wrap">
+        <div class="service-detail-overview__copy">
+          {introParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+
+      <div class="service-detail-overview__media">
+        <CmsImage
+          src={introImage}
+          alt={introImageAlt}
+          class="service-detail-overview__media-image"
+          placeholderLabel="Overview image"
+        />
+      </div>
+    </div>
+
+    <div class="service-detail-overview__details">
+      <div class="service-detail-overview__media">
+        <CmsImage
+          src={detailImage}
+          alt={detailImageAlt}
+          class="service-detail-overview__media-image"
+          placeholderLabel="Detail image"
+        />
+      </div>
+
+      <div class="service-detail-overview__deliverables-wrap">
+        <div class="service-detail-overview__deliverables">
+          <h2 class="service-detail-overview__heading">{sectionTitle}</h2>
+          <div class="service-detail-overview__deliverables-text">
+            {deliverables.map((item) => <p>{item}</p>)}
+            {outroParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+interface Props {
+  title: string;
+  text: string;
+  label: string;
+  items?: string[];
+}
+
+const { title, text, label, items = [] } = Astro.props as Props;
+---
+
+<section class="service-detail-approach-split">
+  <div class="service-detail-approach-split__panel service-detail-approach-split__panel--light">
+    <div class="service-detail-approach-split__intro">
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+  </div>
+
+  <div class="service-detail-approach-split__panel service-detail-approach-split__panel--gold">
+    <p class="service-detail-approach-split__label">{label}</p>
+    <div class="service-detail-approach-split__list">
+      {items.map((item) => (
+        <div class="service-detail-approach-split__item">
+          <span class="service-detail-approach-split__bullet" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="service-detail-approach-split__bullet-svg">
+              <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+              <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <p>{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

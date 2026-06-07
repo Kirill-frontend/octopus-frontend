@@ -1,0 +1,37 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+const {
+  introTop = "",
+  introBottom = "",
+  cards = [],
+  outro = "",
+} = Astro.props;
+---
+
+<section class="service-detail-structures">
+  <div class="service-detail-page__container">
+    <p class="service-detail-structures__intro">{introTop}</p>
+    <p class="service-detail-structures__intro">{introBottom}</p>
+
+    <div class="service-detail-structures__grid">
+      {cards.map((card) => (
+        <article class="service-detail-structures__card">
+          <span class="service-detail-structures__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="service-detail-structures__icon-svg">
+              <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+              <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+
+          <div class="service-detail-structures__body">
+            <h3 class="service-detail-structures__card-title">{card.title}</h3>
+            <p class="service-detail-structures__card-note">{card.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="service-detail-structures__outro">{outro}</p>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+import "../../assets/faq/faq-page.css";
+
+interface FaqItem {
+  question?: string;
+  answer?: string;
+}
+
+const {
+  title,
+  lead = "",
+  paragraphs = [],
+  items = [],
+} = Astro.props as {
+  title?: string;
+  lead?: string;
+  paragraphs?: string[];
+  items?: FaqItem[];
+};
+
+const normalizedTitle =
+  title && title.trim() && title.trim().toUpperCase() !== "FAQ"
+    ? title.trim()
+    : "Frequently asked questions";
+const normalizedLead = lead?.trim() || paragraphs[0] || "";
+const bodyParagraphs =
+  lead?.trim() || !paragraphs.length ? [] : paragraphs.slice(1);
+---
+
+<section class="faq-accordion-section">
+  <div class="faq-accordion-section__container">
+    <div class="faq-accordion-section__intro">
+      <p class="faq-accordion-section__eyebrow">FAQS/</p>
+      <h2 class="faq-accordion-section__title">{normalizedTitle}</h2>
+      {normalizedLead && <p class="faq-accordion-section__lead">{normalizedLead}</p>}
+      {
+        bodyParagraphs.length > 0 && (
+          <div class="faq-accordion-section__body">
+            {bodyParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+        )
+      }
+    </div>
+
+    <div class="faq-accordion-section__list">
+      {items.map((item, index) => (
+        <details class="faq-accordion-section__item" open={index === 0}>
+          <summary class="faq-accordion-section__summary">
+            <span class="faq-accordion-section__question">{item.question}</span>
+            <span class="faq-accordion-section__toggle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="faq-accordion-section__toggle-icon">
+                <path
+                  d="M8 5.5 16 12l-8 6.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </span>
+          </summary>
+
+          {item.answer && <p class="faq-accordion-section__answer">{item.answer}</p>}
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

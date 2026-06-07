@@ -1,0 +1,46 @@
+---
+import CmsImage from "../shared/CmsImage.astro";
+import "../../assets/services/service-detail-page.css";
+
+interface Props {
+  title: string;
+  items?: string[];
+  backgroundImage?: string;
+}
+
+const { title, items = [], backgroundImage } = Astro.props as Props;
+---
+
+<section class="service-detail-title-checklist">
+  {
+    backgroundImage && (
+      <div class="service-detail-title-checklist__background" aria-hidden="true">
+        <CmsImage
+          src={backgroundImage}
+          alt=""
+          wrapperClass="service-detail-title-checklist__background-media"
+          class="service-detail-title-checklist__background-image"
+          placeholderLabel=""
+        />
+      </div>
+    )
+  }
+  <div class="service-detail-page__container service-detail-title-checklist__inner">
+    <div class="service-detail-title-checklist__title-wrap">
+      <h2 class="service-detail-title-checklist__title">{title}</h2>
+    </div>
+
+    <div class="service-detail-title-checklist__list">
+      {items.map((item) => (
+        <div class="service-detail-title-checklist__item">
+          <span class="service-detail-title-checklist__check" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="service-detail-title-checklist__check-svg">
+              <path d="m5.5 12.5 4.1 4.1 8.9-9.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <p>{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

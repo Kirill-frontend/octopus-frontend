@@ -1,0 +1,134 @@
+---
+import "../../assets/contact/contact-faq.css";
+
+const {
+  eyebrow = "Faqs",
+  title = "Frequently asked questions.",
+  description = "Cursus tincidunt tempor aliquam mattis et mi fames at id venenatis massa at egestas egestas dignissim nisl, in ipsum sed consequat in viverra.",
+  defaultOpenIndex = 0,
+} = Astro.props;
+
+const items = [
+  {
+    question: "How many years of experience does Cargo has?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation.",
+  },
+  {
+    question: "How do you determine your rates?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation.",
+  },
+  {
+    question: "What are the taxes applicable on sea freight?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation.",
+  },
+  {
+    question: "How are detention and demurrage charges calculated?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation.",
+  },
+];
+---
+
+<section class="contact-faq" aria-labelledby="contact-faq-title">
+  <div class="contact-faq__container">
+    <div class="contact-faq__header">
+      <p class="contact-faq__eyebrow">{eyebrow}</p>
+      <h2 id="contact-faq-title" class="contact-faq__title">{title}</h2>
+      <p class="contact-faq__text">{description}</p>
+    </div>
+
+    <div class="contact-faq__list" data-contact-faq-list>
+      {items.map((item, index) => (
+        <details class="contact-faq__item" open={index === defaultOpenIndex} data-contact-faq-item>
+          <summary class="contact-faq__question">{item.question}</summary>
+          <div class="contact-faq__answer-wrap" data-contact-faq-answer-wrap>
+            <p class="contact-faq__answer">{item.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const faqLists = document.querySelectorAll("[data-contact-faq-list]");
+
+  const animateFaqItem = (item, shouldOpen) => {
+    const answerWrap = item.querySelector("[data-contact-faq-answer-wrap]");
+    if (!answerWrap) return;
+
+    answerWrap.style.overflow = "hidden";
+    answerWrap.style.transition = "height 260ms ease, opacity 220ms ease";
+
+    if (shouldOpen) {
+      item.open = true;
+      answerWrap.style.height = "0px";
+      answerWrap.style.opacity = "0";
+
+      requestAnimationFrame(() => {
+        answerWrap.style.height = `${answerWrap.scrollHeight}px`;
+        answerWrap.style.opacity = "1";
+      });
+
+      const onOpenEnd = (event) => {
+        if (event.propertyName !== "height") return;
+        answerWrap.style.height = "auto";
+        answerWrap.style.overflow = "visible";
+        answerWrap.removeEventListener("transitionend", onOpenEnd);
+      };
+
+      answerWrap.addEventListener("transitionend", onOpenEnd);
+      return;
+    }
+
+    answerWrap.style.height = `${answerWrap.scrollHeight}px`;
+    answerWrap.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      answerWrap.style.height = "0px";
+      answerWrap.style.opacity = "0";
+    });
+
+    const onCloseEnd = (event) => {
+      if (event.propertyName !== "height") return;
+      item.open = false;
+      answerWrap.removeEventListener("transitionend", onCloseEnd);
+    };
+
+    answerWrap.addEventListener("transitionend", onCloseEnd);
+  };
+
+  faqLists.forEach((list) => {
+    const items = Array.from(list.querySelectorAll("[data-contact-faq-item]"));
+
+    items.forEach((item) => {
+      const summary = item.querySelector("summary");
+      const answerWrap = item.querySelector("[data-contact-faq-answer-wrap]");
+      if (!summary || !answerWrap) return;
+
+      if (item.open) {
+        answerWrap.style.height = "auto";
+        answerWrap.style.opacity = "1";
+      } else {
+        answerWrap.style.height = "0px";
+        answerWrap.style.opacity = "0";
+      }
+
+      summary.addEventListener("click", (event) => {
+        event.preventDefault();
+        const isOpen = item.open;
+
+        items.forEach((currentItem) => {
+          if (currentItem !== item && currentItem.open) {
+            animateFaqItem(currentItem, false);
+          }
+        });
+
+        animateFaqItem(item, !isOpen);
+      });
+    });
+  });
+</script>

@@ -1,0 +1,40 @@
+---
+import "../../assets/about/about-shared.css";
+import "../../assets/about/about-team.css";
+import {
+  resolvePayloadOrFallbackAlt,
+  resolvePayloadOrFallbackUrl,
+} from "../../lib/payload";
+
+const {
+  data = {},
+} = Astro.props;
+
+const team = Array.isArray(data?.members) ? data.members : [];
+---
+
+<section class="about-team">
+  <div class="about-team__container">
+    <div class="about-team__intro">
+      <p class="about-eyebrow">{data?.eyebrow || "Our team"}</p>
+      <h2 class="about-team__title">{data?.title || "The amazing team members behind Cargo."}</h2>
+    </div>
+
+    <div class="about-team__grid">
+      {team.map((member) => {
+        const imageUrl = resolvePayloadOrFallbackUrl(member?.image, member?.imageUrl);
+        const imageAlt = resolvePayloadOrFallbackAlt(member?.image, member?.imageAlt, member?.name || "Team member");
+
+        return (
+          <article class="about-team-card">
+            {imageUrl && <img src={imageUrl} alt={imageAlt} class="about-team-card__image" />}
+            <div class="about-team-card__content">
+              <h3 class="about-team-card__name">{member?.name}</h3>
+              <p class="about-team-card__role">{member?.role}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

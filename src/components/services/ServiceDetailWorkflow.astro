@@ -1,0 +1,36 @@
+---
+import "../../assets/services/service-detail-page.css";
+import CmsImage from "../shared/CmsImage.astro";
+
+const {
+  title = "How we work",
+  steps = [],
+} = Astro.props;
+---
+
+<section class="service-detail-workflow">
+  <div class="service-detail-page__container">
+    <h2 class="service-detail-workflow__title">{title}</h2>
+
+    <div class="service-detail-workflow__rows">
+      {steps.map((step) => (
+        <div class:list={["service-detail-workflow__row", { "service-detail-workflow__row--reverse": step.reverse }]}>
+          <article class="service-detail-workflow__card">
+            <div class="service-detail-workflow__number">{step.number}</div>
+            <h3 class="service-detail-workflow__card-title">{step.title}</h3>
+          </article>
+          <div class="service-detail-workflow__media" aria-hidden="true">
+            {step.image && (
+              <CmsImage
+                src={step.image}
+                alt={step.title}
+                class="service-detail-workflow__media-image"
+                placeholderLabel={step.number}
+              />
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

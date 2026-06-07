@@ -1,0 +1,29 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServiceBlocks from "../components/services/ServiceBlocks.astro";
+import {
+  getFooterData,
+  getHeaderData,
+  getServicePageBySlug,
+  getSiteSettings,
+} from "../lib/payload";
+
+const [siteSettings, header, footer, servicePage] = await Promise.all([
+  getSiteSettings(),
+  getHeaderData(),
+  getFooterData(),
+  getServicePageBySlug("engineering-solutions"),
+]);
+---
+
+<Layout
+  pageKey="service"
+  headerBackground="transparent"
+  headerIsOpaque={false}
+  seo={servicePage?.seo}
+  siteSettings={siteSettings}
+  header={header}
+  footer={footer}
+>
+  <ServiceBlocks blocks={servicePage?.blocks ?? []} servicePage={servicePage} />
+</Layout>

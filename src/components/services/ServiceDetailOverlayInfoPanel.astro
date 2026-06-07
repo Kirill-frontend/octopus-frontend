@@ -1,0 +1,74 @@
+---
+import "../../assets/services/service-detail-page.css";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  backgroundImage?: string;
+  introText?: string;
+  services?: string[];
+  outroText?: string;
+}
+
+const {
+  title,
+  subtitle,
+  backgroundImage,
+  introText = "",
+  services = [],
+  outroText = "",
+} = Astro.props as Props;
+
+const introParagraphs = introText
+  .split(/\n\s*\n/)
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean);
+
+const outroParagraphs = outroText
+  .split(/\n\s*\n/)
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean);
+---
+
+<section class="service-detail-overlay-info-panel">
+  {backgroundImage && (
+    <div class="service-detail-overlay-info-panel__background" aria-hidden="true">
+      <img
+        src={backgroundImage}
+        alt=""
+        class="service-detail-overlay-info-panel__background-image"
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  <div class="service-detail-page__container">
+    <div class="service-detail-overlay-info-panel__card">
+      <div class="service-detail-overlay-info-panel__header">
+        <h2 class="service-detail-overlay-info-panel__title">{title}</h2>
+        {subtitle && <p class="service-detail-overlay-info-panel__subtitle">{subtitle}</p>}
+      </div>
+
+      <div class="service-detail-overlay-info-panel__body">
+        {introParagraphs.map((paragraph) => (
+          <p class="service-detail-overlay-info-panel__text">{paragraph}</p>
+        ))}
+
+        {services.length > 0 && (
+          <div class="service-detail-overlay-info-panel__services">
+            <p class="service-detail-overlay-info-panel__label">Services include:</p>
+            <ul class="service-detail-overlay-info-panel__list">
+              {services.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {outroParagraphs.map((paragraph) => (
+          <p class="service-detail-overlay-info-panel__text">{paragraph}</p>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

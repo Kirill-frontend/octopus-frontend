@@ -1,0 +1,27 @@
+---
+import "../../assets/services/services-hero.css";
+
+const {
+  data,
+  eyebrow = "Services/",
+  title = "A comprehensive set of services",
+  text = "Since 1883, we have innovated and challenged the conservative shipping industry, providing our customers with superior solutions for moving cargo around the world.",
+} = Astro.props;
+
+const resolvedEyebrow = data?.eyebrow || eyebrow;
+const resolvedTitle = data?.title || title;
+const resolvedText = data?.text || text;
+---
+
+<section class="services-hero">
+  <div class="services-hero__container">
+    <div class="services-hero__grid">
+      <div class="services-hero__copy">
+        <p class="services-hero__eyebrow">{resolvedEyebrow}</p>
+        <h1 class="services-hero__title">{resolvedTitle}</h1>
+      </div>
+
+      <p class="services-hero__text">{resolvedText}</p>
+    </div>
+  </div>
+</section>

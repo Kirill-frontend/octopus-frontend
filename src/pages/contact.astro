@@ -1,0 +1,34 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContactHero from "../components/contact/ContactHero.astro";
+import ContactPartners from "../components/contact/ContactPartners.astro";
+import AboutOffice from "../components/about/AboutOffice.astro";
+import AboutCta from "../components/about/AboutCta.astro";
+import {
+  getContactPage,
+  getFooterData,
+  getHeaderData,
+  getSiteSettings,
+} from "../lib/payload";
+
+const [siteSettings, header, footer, contactPage] = await Promise.all([
+  getSiteSettings(),
+  getHeaderData(),
+  getFooterData(),
+  getContactPage(),
+]);
+---
+
+<Layout
+  pageKey="contact"
+  headerBackground="#F2F2F2"
+  seo={contactPage?.seo}
+  siteSettings={siteSettings}
+  header={header}
+  footer={footer}
+>
+  <ContactHero data={contactPage?.hero} />
+  <AboutOffice variant="contact" data={contactPage?.office} />
+  <ContactPartners data={contactPage?.partners} />
+  <AboutCta data={contactPage?.cta} />
+</Layout>
