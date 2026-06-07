@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "start": "astro preview",
+    "preview": "astro preview",
+    "start": "astro",
     "astro": "astro"
   },
   "dependencies": {
