@@ -35,8 +35,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 651px;
-  max-width: 651px;
+  width: 100%;
+  max-width: min(651px, calc(100% - 840px));
+  min-width: 0;
 }
 
 .service-detail-hero__title {
@@ -56,6 +57,7 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 30.01px;
+  overflow-wrap: anywhere;
 }
 
 .service-detail-hero__panel {
@@ -146,6 +148,31 @@
 
 .service-detail-hero__form-status[data-state="error"] {
   color: #ffb3c1;
+}
+
+@media (max-width: 1400px) {
+  .service-detail-hero__container {
+    padding: 180px 56px 72px 120px;
+  }
+
+  .service-detail-hero__copy {
+    max-width: min(560px, calc(100% - 660px));
+  }
+
+  .service-detail-hero__title {
+    font-size: 60px;
+    line-height: 1.08;
+  }
+
+  .service-detail-hero__panel {
+    top: 132px;
+    width: 560px;
+    padding: 72px 56px;
+  }
+
+  .service-detail-hero__field {
+    width: 100%;
+  }
 }
 
 @media (max-width: 991px) {
