@@ -1522,7 +1522,9 @@
 }
 
 .service-detail-approach-split__intro {
-  width: 549px;
+  width: 100%;
+  max-width: 549px;
+  min-width: 0;
 }
 
 .service-detail-approach-split__intro h2 {
@@ -1542,6 +1544,7 @@
 
 .service-detail-approach-split__intro p {
   color: #757575;
+  overflow-wrap: anywhere;
 }
 
 .service-detail-approach-split__label {
@@ -1567,12 +1570,15 @@
 }
 
 .service-detail-intro-badge__text {
-  width: 1320px;
+  width: 100%;
+  max-width: 1320px;
+  min-width: 0;
   margin: 0;
   color: #757575;
   font-size: 18px;
   font-weight: 400;
   line-height: 30.01px;
+  overflow-wrap: anywhere;
 }
 
 .service-detail-intro-badge__badge {
@@ -2068,6 +2074,19 @@
     grid-template-columns: 1fr;
   }
 
+  .service-detail-approach-split {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-approach-split__panel--light,
+  .service-detail-approach-split__panel--gold {
+    padding: 48px 32px;
+  }
+
+  .service-detail-approach-split__intro {
+    max-width: none;
+  }
+
   .service-detail-support-split__panel--dark,
   .service-detail-support-split__panel--light {
     min-height: 0;
@@ -2297,6 +2316,20 @@
 
   .service-detail-overlay-info-panel__card {
     padding: 40px 20px 24px;
+  }
+
+  .service-detail-approach-split__panel--light,
+  .service-detail-approach-split__panel--gold {
+    padding: 40px 20px;
+  }
+
+  .service-detail-intro-badge {
+    padding: 72px 0;
+  }
+
+  .service-detail-intro-badge__inner {
+    gap: 24px;
+    align-items: flex-start;
   }
 }
 
