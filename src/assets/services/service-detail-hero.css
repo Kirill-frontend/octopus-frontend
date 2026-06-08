@@ -64,7 +64,7 @@
   position: absolute;
   top: 150px;
   right: 0;
-  width: 763px;
+  width: 680px;
   padding: 100px 300px 100px 100px;
   background: #00293a;
   box-sizing: border-box;
@@ -152,11 +152,11 @@
 
 @media (max-width: 1400px) {
   .service-detail-hero__container {
-    padding: 180px 56px 72px 120px;
+    padding: 180px 48px 72px 104px;
   }
 
   .service-detail-hero__copy {
-    max-width: min(560px, calc(100% - 660px));
+    max-width: min(560px, calc(100% - 560px));
   }
 
   .service-detail-hero__title {
@@ -166,12 +166,66 @@
 
   .service-detail-hero__panel {
     top: 132px;
-    width: 560px;
-    padding: 72px 56px;
+    width: 480px;
+    padding: 56px 40px;
   }
 
   .service-detail-hero__field {
     width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .service-detail-hero__container {
+    padding: 164px 40px 64px 72px;
+  }
+
+  .service-detail-hero__copy {
+    max-width: min(520px, calc(100% - 560px));
+  }
+
+  .service-detail-hero__panel {
+    top: 120px;
+    width: 500px;
+    padding: 56px 40px;
+  }
+
+  .service-detail-hero__form {
+    gap: 32px;
+  }
+
+  .service-detail-hero__field {
+    gap: 12px;
+  }
+
+  .service-detail-hero__button {
+    min-height: 60px;
+    padding: 20px 32px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .service-detail-hero__container {
+    padding: 152px 32px 56px 48px;
+  }
+
+  .service-detail-hero__copy {
+    max-width: min(460px, calc(100% - 500px));
+  }
+
+  .service-detail-hero__title {
+    font-size: 52px;
+  }
+
+  .service-detail-hero__panel {
+    width: 440px;
+    padding: 48px 32px;
+  }
+
+  .service-detail-hero__label,
+  .service-detail-hero__field input {
+    font-size: 16px;
+    line-height: 1.6;
   }
 }
 
