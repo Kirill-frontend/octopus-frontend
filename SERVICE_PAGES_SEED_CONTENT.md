@@ -267,19 +267,38 @@ Notes:
   - `Octopus Group provides comprehensive Port Captain services, ensuring full supervision and coordination of loading, securing, and discharge operations for heavy lift, project, offshore, and wind cargoes.`
   - `We develop custom stowage solutions using advanced engineering software such as AutoCAD and Load Planner CAD. Our network includes both in-house Port Captains and trusted partners located worldwide.`
 
-### Block 3: `supportSplit`
+### Block 3: `portCaptainComposite`
 
-- `leftLabel`: `Once aligned on the operational concept, Octopus Group can deliver:`
-- `leftItems`:
+- `approachTitle`: `Our Approach`
+- `approachText`: `Our focus is to identify risks early and ensure operational efficiency.`
+- `approachLabel`: `We review:`
+- `approachItems`:
+  - `Cargo information and drawings`
+  - `Vessel and lifting equipment compatibility`
+  - `Terminal capabilities and local restrictions`
+  - `Environmental and navigational factors`
+  - `Applicable standards: IMO, ISO, DNV, OCIMF`
+- `supportLabel`: `Once aligned on the operational concept, Octopus Group can deliver:`
+- `supportItems`:
   - `Port Captain attendance`
   - `Survey services`
   - `Engineering and technical planning`
   - `Lifting and lashing equipment supply`
   - `Agency services and local coordination`
-- `rightTitle`: `One Entry Point - Full Support When You're Ready`
-- `rightText`: `You decide how far to proceed - we remain the single coordination hub.`
+- `supportTitle`: `One Entry Point - Full Support When You're Ready`
+- `supportText`: `You decide how far to proceed - we remain the single coordination hub.`
 
-### Block 4: `ctaBanner`
+### Block 4: `reasonsGrid`
+
+- `title`: `Reporting`
+- `subtitle`: `Upon completion:`
+- `topItems`:
+  - `Full operational report`
+  - `Photo documentation`
+  - `Technical comments and recommendations`
+- `bottomItems`: none
+
+### Block 5: `ctaBanner`
 
 - `title`: `Octopus Group - One Entry Point`
 - `description`: `When operational control matters on the quay, onboard, or during discharge, we stay accountable from start to finish.`

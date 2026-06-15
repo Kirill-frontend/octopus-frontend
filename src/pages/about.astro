@@ -21,11 +21,17 @@ const [siteSettings, header, footer, aboutPage] = await Promise.all([
 ]);
 ---
 
-<Layout pageKey="about" seo={aboutPage?.seo} siteSettings={siteSettings} header={header} footer={footer}>
+<Layout
+  pageKey="about"
+  seo={aboutPage?.seo}
+  siteSettings={siteSettings}
+  header={header}
+  footer={footer}
+>
   <AboutHero data={aboutPage?.hero} />
   <AboutStory data={aboutPage?.aboutStory} />
   <AboutValues data={aboutPage?.values} />
   <AboutOffice data={aboutPage?.office} />
-  <AboutTeam data={aboutPage?.team} />
+
   <AboutCta data={aboutPage?.cta} />
 </Layout>

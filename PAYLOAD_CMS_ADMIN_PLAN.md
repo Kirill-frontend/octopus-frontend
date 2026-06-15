@@ -707,7 +707,46 @@ Seed:
 - rightTitle: `One Entry Point — Full Support When You’re Ready`
 - rightText: `You decide how far to proceed — we remain the single coordination hub.`
 
-### 17. `ctaBanner`
+### 17. `portCaptainComposite`
+
+Use this combined block for the Port Captain page where the old `approachSplit` and `supportSplit` should be managed as one editorial section.
+
+```ts
+{
+  blockType: 'portCaptainComposite'
+  approachTitle: string
+  approachText: textarea
+  approachLabel: string
+  approachItems: array of text
+  supportLabel: string
+  supportItems: array of text
+  supportTitle: string
+  supportText: textarea
+}
+```
+
+Seed:
+
+- approachTitle: `Our Approach`
+- approachText: `Our focus is to identify risks early and ensure operational efficiency.`
+- approachLabel: `We review:`
+- approachItems:
+  - `Cargo information and drawings`
+  - `Vessel and lifting equipment compatibility`
+  - `Terminal capabilities and local restrictions`
+  - `Environmental and navigational factors`
+  - `Applicable standards: IMO, ISO, DNV, OCIMF`
+- supportLabel: `Once aligned on the operational concept, Octopus Group can deliver:`
+- supportItems:
+  - `Port Captain attendance`
+  - `Survey services`
+  - `Engineering and technical planning`
+  - `Lifting and lashing equipment supply`
+  - `Agency services and local coordination`
+- supportTitle: `One Entry Point - Full Support When You're Ready`
+- supportText: `You decide how far to proceed - we remain the single coordination hub.`
+
+### 18. `ctaBanner`
 
 ```ts
 {

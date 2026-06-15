@@ -13,6 +13,7 @@ import ServiceDetailHero from "./ServiceDetailHero.astro";
 import ServiceDetailIntroBadge from "./ServiceDetailIntroBadge.astro";
 import ServiceDetailOverview from "./ServiceDetailOverview.astro";
 import ServiceDetailOverlayInfoPanel from "./ServiceDetailOverlayInfoPanel.astro";
+import ServiceDetailPortCaptainComposite from "./ServiceDetailPortCaptainComposite.astro";
 import ServiceDetailPortCaptainIntro from "./ServiceDetailPortCaptainIntro.astro";
 import ServiceDetailProcess from "./ServiceDetailProcess.astro";
 import ServiceDetailProduction from "./ServiceDetailProduction.astro";
@@ -29,7 +30,38 @@ const { blocks = [], servicePage } = Astro.props;
 --- 
 
 {
-  blocks.map((block) => {
+  blocks.map((block, index) => {
+    const previousBlock = blocks[index - 1];
+    const nextBlock = blocks[index + 1];
+    const isPortCaptainPage = servicePage?.slug === "port-captain-service";
+
+    if (
+      isPortCaptainPage &&
+      block.blockType === "approachSplit" &&
+      nextBlock?.blockType === "supportSplit"
+    ) {
+      return (
+        <ServiceDetailPortCaptainComposite
+          approachTitle={block.title}
+          approachText={block.text}
+          approachLabel={block.label}
+          approachItems={block.items?.map((item) => item.text) ?? []}
+          supportLabel={nextBlock.leftLabel}
+          supportItems={nextBlock.leftItems?.map((item) => item.text) ?? []}
+          supportTitle={nextBlock.rightTitle}
+          supportText={nextBlock.rightText}
+        />
+      );
+    }
+
+    if (
+      isPortCaptainPage &&
+      block.blockType === "supportSplit" &&
+      previousBlock?.blockType === "approachSplit"
+    ) {
+      return null;
+    }
+
     switch (block.blockType) {
       case "serviceHero":
         return (
@@ -216,6 +248,19 @@ const { blocks = [], servicePage } = Astro.props;
             leftItems={block.leftItems?.map((item) => item.text) ?? []}
             rightTitle={block.rightTitle}
             rightText={block.rightText}
+          />
+        );
+      case "portCaptainComposite":
+        return (
+          <ServiceDetailPortCaptainComposite
+            approachTitle={block.approachTitle}
+            approachText={block.approachText}
+            approachLabel={block.approachLabel}
+            approachItems={block.approachItems?.map((item) => item.text) ?? []}
+            supportLabel={block.supportLabel}
+            supportItems={block.supportItems?.map((item) => item.text) ?? []}
+            supportTitle={block.supportTitle}
+            supportText={block.supportText}
           />
         );
       case "featureHighlightSplit":

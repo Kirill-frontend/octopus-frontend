@@ -1340,17 +1340,22 @@
 }
 
 .service-detail-support-split__label {
-  width: 580px;
+  width: 100%;
+  max-width: 580px;
+  min-width: 0;
   margin: 0 0 32px;
   color: rgba(255, 255, 255, 0.6);
   font-size: 18px;
   font-weight: 400;
   line-height: 30.01px;
+  overflow-wrap: anywhere;
 }
 
 .service-detail-support-split__list {
   display: flex;
-  width: 580px;
+  width: 100%;
+  max-width: 580px;
+  min-width: 0;
   flex-direction: column;
   gap: 32px;
 }
@@ -1383,7 +1388,9 @@
 }
 
 .service-detail-support-split__copy {
-  width: 549px;
+  width: 100%;
+  max-width: 549px;
+  min-width: 0;
 }
 
 .service-detail-support-split__copy h2 {
@@ -1555,6 +1562,128 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.service-detail-port-captain-composite {
+  background: #ffffff;
+}
+
+.service-detail-port-captain-composite__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 960px));
+  justify-content: center;
+}
+
+.service-detail-port-captain-composite__panel {
+  box-sizing: border-box;
+}
+
+.service-detail-port-captain-composite__panel--light,
+.service-detail-port-captain-composite__panel--muted {
+  padding: 100px 80px 100px 300px;
+}
+
+.service-detail-port-captain-composite__panel--light {
+  background: #ffffff;
+}
+
+.service-detail-port-captain-composite__panel--muted {
+  display: flex;
+  align-items: flex-end;
+  background: #f2f2f2;
+}
+
+.service-detail-port-captain-composite__panel--gold,
+.service-detail-port-captain-composite__panel--dark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding: 100px 300px 100px 80px;
+}
+
+.service-detail-port-captain-composite__panel--gold {
+  background: #c5b883;
+}
+
+.service-detail-port-captain-composite__panel--dark {
+  background: #00293a;
+}
+
+.service-detail-port-captain-composite__intro {
+  width: 100%;
+  max-width: 549px;
+  min-width: 0;
+}
+
+.service-detail-port-captain-composite__intro h2 {
+  margin: 0 0 24px;
+  color: #040404;
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 50.01px;
+}
+
+.service-detail-port-captain-composite__intro p,
+.service-detail-port-captain-composite__label {
+  margin: 0;
+  font-size: 18px;
+  line-height: 30.01px;
+}
+
+.service-detail-port-captain-composite__intro p {
+  color: #757575;
+  overflow-wrap: anywhere;
+}
+
+.service-detail-port-captain-composite__label {
+  width: 100%;
+  max-width: 580px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.service-detail-port-captain-composite__panel--gold .service-detail-port-captain-composite__label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.service-detail-port-captain-composite__panel--dark .service-detail-port-captain-composite__label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.service-detail-port-captain-composite__list {
+  display: flex;
+  width: 100%;
+  max-width: 580px;
+  min-width: 0;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.service-detail-port-captain-composite__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.service-detail-port-captain-composite__bullet {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+  flex: 0 0 auto;
+}
+
+.service-detail-port-captain-composite__bullet-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.service-detail-port-captain-composite__item p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 30.01px;
 }
 
 .service-detail-intro-badge {
@@ -1742,7 +1871,7 @@
 
 .service-detail-overlay-info-panel__card {
   padding: 60px;
-  background: #f2f2f2;
+  background: transparent;
   border: 1px solid #ffffff;
 }
 
@@ -1755,7 +1884,7 @@
 
 .service-detail-overlay-info-panel__title {
   margin: 0;
-  color: #040404;
+  color: #fff;
   font-size: 38px;
   font-weight: 500;
   line-height: 53.99px;
@@ -1763,7 +1892,7 @@
 
 .service-detail-overlay-info-panel__subtitle {
   margin: 0;
-  color: rgba(4, 4, 4, 0.5);
+  color: #fff;
   font-size: 24px;
   font-weight: 500;
   line-height: 53.99px;
@@ -1780,7 +1909,7 @@
 .service-detail-overlay-info-panel__label,
 .service-detail-overlay-info-panel__list {
   margin: 0;
-  color: #040404;
+  color: #fff;
   font-size: 18px;
   font-weight: 400;
   line-height: 30.01px;
@@ -2078,12 +2207,29 @@
     grid-template-columns: 1fr;
   }
 
+  .service-detail-port-captain-composite__row {
+    grid-template-columns: 1fr;
+  }
+
   .service-detail-approach-split__panel--light,
   .service-detail-approach-split__panel--gold {
     padding: 48px 32px;
   }
 
+  .service-detail-port-captain-composite__panel--light,
+  .service-detail-port-captain-composite__panel--gold,
+  .service-detail-port-captain-composite__panel--dark,
+  .service-detail-port-captain-composite__panel--muted {
+    padding: 48px 32px;
+  }
+
   .service-detail-approach-split__intro {
+    max-width: none;
+  }
+
+  .service-detail-port-captain-composite__intro,
+  .service-detail-port-captain-composite__label,
+  .service-detail-port-captain-composite__list {
     max-width: none;
   }
 
@@ -2323,6 +2469,13 @@
     padding: 40px 20px;
   }
 
+  .service-detail-port-captain-composite__panel--light,
+  .service-detail-port-captain-composite__panel--gold,
+  .service-detail-port-captain-composite__panel--dark,
+  .service-detail-port-captain-composite__panel--muted {
+    padding: 40px 20px;
+  }
+
   .service-detail-intro-badge {
     padding: 72px 0;
   }
@@ -2387,6 +2540,9 @@
   .service-detail-support-split__label,
   .service-detail-support-split__item p,
   .service-detail-support-split__copy p,
+  .service-detail-port-captain-composite__label,
+  .service-detail-port-captain-composite__item p,
+  .service-detail-port-captain-composite__intro p,
   .service-detail-approach__subtitle,
   .service-detail-approach__review-label,
   .service-detail-approach__services-label,
@@ -2509,6 +2665,11 @@
   }
 
   .service-detail-support-split__copy h2 {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .service-detail-port-captain-composite__intro h2 {
     font-size: 30px;
     line-height: 1.2;
   }
