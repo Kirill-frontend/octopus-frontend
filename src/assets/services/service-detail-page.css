@@ -1574,16 +1574,38 @@
   justify-content: center;
 }
 
+.service-detail-port-captain-composite__media-panel {
+  min-height: 645px;
+  background: #c5b883;
+}
+
+.service-detail-port-captain-composite__media {
+  width: 100%;
+  height: 100%;
+}
+
+.service-detail-port-captain-composite__media-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .service-detail-port-captain-composite__panel {
   box-sizing: border-box;
 }
 
 .service-detail-port-captain-composite__panel--light,
-.service-detail-port-captain-composite__panel--muted {
+.service-detail-port-captain-composite__panel--muted,
+.service-detail-port-captain-composite__panel--content {
   padding: 100px 80px 100px 300px;
 }
 
 .service-detail-port-captain-composite__panel--light {
+  background: #ffffff;
+}
+
+.service-detail-port-captain-composite__panel--content {
   background: #ffffff;
 }
 
@@ -1608,6 +1630,15 @@
 
 .service-detail-port-captain-composite__panel--dark {
   background: #00293a;
+}
+
+.service-detail-port-captain-composite__content-inner {
+  display: flex;
+  width: 100%;
+  max-width: 580px;
+  min-width: 0;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .service-detail-port-captain-composite__intro {
@@ -1636,6 +1667,13 @@
   overflow-wrap: anywhere;
 }
 
+.service-detail-port-captain-composite__content-label {
+  margin: 0;
+  color: #040404;
+  font-size: 18px;
+  line-height: 30.01px;
+}
+
 .service-detail-port-captain-composite__label {
   width: 100%;
   max-width: 580px;
@@ -1660,7 +1698,21 @@
   gap: 32px;
 }
 
+.service-detail-port-captain-composite__content-list {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .service-detail-port-captain-composite__item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.service-detail-port-captain-composite__content-item {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -1674,7 +1726,20 @@
   flex: 0 0 auto;
 }
 
+.service-detail-port-captain-composite__content-bullet {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  color: #040404;
+  flex: 0 0 auto;
+}
+
 .service-detail-port-captain-composite__bullet-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.service-detail-port-captain-composite__content-bullet-svg {
   width: 100%;
   height: 100%;
 }
@@ -1682,6 +1747,13 @@
 .service-detail-port-captain-composite__item p {
   margin: 0;
   color: #ffffff;
+  font-size: 18px;
+  line-height: 30.01px;
+}
+
+.service-detail-port-captain-composite__content-item p {
+  margin: 0;
+  color: #757575;
   font-size: 18px;
   line-height: 30.01px;
 }
@@ -2219,7 +2291,8 @@
   .service-detail-port-captain-composite__panel--light,
   .service-detail-port-captain-composite__panel--gold,
   .service-detail-port-captain-composite__panel--dark,
-  .service-detail-port-captain-composite__panel--muted {
+  .service-detail-port-captain-composite__panel--muted,
+  .service-detail-port-captain-composite__panel--content {
     padding: 48px 32px;
   }
 
@@ -2229,8 +2302,13 @@
 
   .service-detail-port-captain-composite__intro,
   .service-detail-port-captain-composite__label,
-  .service-detail-port-captain-composite__list {
+  .service-detail-port-captain-composite__list,
+  .service-detail-port-captain-composite__content-inner {
     max-width: none;
+  }
+
+  .service-detail-port-captain-composite__media-panel {
+    min-height: 360px;
   }
 
   .service-detail-support-split__panel--dark,
@@ -2472,7 +2550,8 @@
   .service-detail-port-captain-composite__panel--light,
   .service-detail-port-captain-composite__panel--gold,
   .service-detail-port-captain-composite__panel--dark,
-  .service-detail-port-captain-composite__panel--muted {
+  .service-detail-port-captain-composite__panel--muted,
+  .service-detail-port-captain-composite__panel--content {
     padding: 40px 20px;
   }
 
@@ -2543,6 +2622,8 @@
   .service-detail-port-captain-composite__label,
   .service-detail-port-captain-composite__item p,
   .service-detail-port-captain-composite__intro p,
+  .service-detail-port-captain-composite__content-label,
+  .service-detail-port-captain-composite__content-item p,
   .service-detail-approach__subtitle,
   .service-detail-approach__review-label,
   .service-detail-approach__services-label,

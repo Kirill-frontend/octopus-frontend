@@ -255,12 +255,14 @@ const { blocks = [], servicePage } = Astro.props;
           <ServiceDetailPortCaptainComposite
             approachTitle={block.approachTitle}
             approachText={block.approachText}
+            approachImage={resolvePayloadMediaUrl(block.approachImage)}
             approachLabel={block.approachLabel}
             approachItems={block.approachItems?.map((item) => item.text) ?? []}
             supportLabel={block.supportLabel}
             supportItems={block.supportItems?.map((item) => item.text) ?? []}
             supportTitle={block.supportTitle}
             supportText={block.supportText}
+            supportImage={resolvePayloadMediaUrl(block.supportImage)}
           />
         );
       case "featureHighlightSplit":

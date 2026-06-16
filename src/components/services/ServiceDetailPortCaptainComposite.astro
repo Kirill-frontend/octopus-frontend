@@ -1,79 +1,172 @@
 ---
+import CmsImage from "../shared/CmsImage.astro";
 import "../../assets/services/service-detail-page.css";
 
 interface Props {
   approachTitle?: string;
   approachText?: string;
+  approachImage?: string;
   approachLabel?: string;
   approachItems?: string[];
   supportLabel?: string;
   supportItems?: string[];
   supportTitle?: string;
   supportText?: string;
+  supportImage?: string;
 }
 
 const {
   approachTitle = "",
   approachText = "",
+  approachImage,
   approachLabel = "",
   approachItems = [],
   supportLabel = "",
   supportItems = [],
   supportTitle = "",
   supportText = "",
+  supportImage,
 } = Astro.props as Props;
 ---
 
 <section class="service-detail-port-captain-composite">
   <div class="service-detail-port-captain-composite__row service-detail-port-captain-composite__row--approach">
-    <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--gold">
-      {approachLabel && <p class="service-detail-port-captain-composite__label">{approachLabel}</p>}
-      <div class="service-detail-port-captain-composite__list">
-        {approachItems.map((item) => (
-          <div class="service-detail-port-captain-composite__item">
-            <span class="service-detail-port-captain-composite__bullet" aria-hidden="true">
-              <svg viewBox="0 0 24 24" class="service-detail-port-captain-composite__bullet-svg">
-                <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
-                <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </span>
-            <p>{item}</p>
+    {
+      approachImage ? (
+        <>
+          <div class="service-detail-port-captain-composite__media-panel service-detail-port-captain-composite__media-panel--approach">
+            <CmsImage
+              src={approachImage}
+              alt=""
+              wrapperClass="service-detail-port-captain-composite__media"
+              class="service-detail-port-captain-composite__media-image"
+              placeholderLabel=""
+            />
           </div>
-        ))}
-      </div>
-    </div>
 
-    <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--light">
-      <div class="service-detail-port-captain-composite__intro">
-        {approachTitle && <h2>{approachTitle}</h2>}
-        {approachText && <p>{approachText}</p>}
-      </div>
-    </div>
+          <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--content">
+            <div class="service-detail-port-captain-composite__content-inner">
+              <div class="service-detail-port-captain-composite__intro">
+                {approachTitle && <h2>{approachTitle}</h2>}
+                {approachText && <p>{approachText}</p>}
+              </div>
+
+              {approachLabel && (
+                <p class="service-detail-port-captain-composite__content-label">{approachLabel}</p>
+              )}
+              <div class="service-detail-port-captain-composite__content-list">
+                {approachItems.map((item) => (
+                  <div class="service-detail-port-captain-composite__content-item">
+                    <span class="service-detail-port-captain-composite__content-bullet" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="service-detail-port-captain-composite__content-bullet-svg">
+                        <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                        <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </span>
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--gold">
+            {approachLabel && <p class="service-detail-port-captain-composite__label">{approachLabel}</p>}
+            <div class="service-detail-port-captain-composite__list">
+              {approachItems.map((item) => (
+                <div class="service-detail-port-captain-composite__item">
+                  <span class="service-detail-port-captain-composite__bullet" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" class="service-detail-port-captain-composite__bullet-svg">
+                      <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                      <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--light">
+            <div class="service-detail-port-captain-composite__intro">
+              {approachTitle && <h2>{approachTitle}</h2>}
+              {approachText && <p>{approachText}</p>}
+            </div>
+          </div>
+        </>
+      )
+    }
   </div>
 
   <div class="service-detail-port-captain-composite__row service-detail-port-captain-composite__row--support">
-    <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--light">
-      <div class="service-detail-port-captain-composite__intro">
-        {supportTitle && <h2>{supportTitle}</h2>}
-        {supportText && <p>{supportText}</p>}
-      </div>
-    </div>
+    {
+      supportImage ? (
+        <>
+          <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--content">
+            <div class="service-detail-port-captain-composite__content-inner">
+              <div class="service-detail-port-captain-composite__intro">
+                {supportTitle && <h2>{supportTitle}</h2>}
+                {supportText && <p>{supportText}</p>}
+              </div>
 
-    <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--gold">
-      {supportLabel && <p class="service-detail-port-captain-composite__label">{supportLabel}</p>}
-      <div class="service-detail-port-captain-composite__list">
-        {supportItems.map((item) => (
-          <div class="service-detail-port-captain-composite__item">
-            <span class="service-detail-port-captain-composite__bullet" aria-hidden="true">
-              <svg viewBox="0 0 24 24" class="service-detail-port-captain-composite__bullet-svg">
-                <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
-                <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            </span>
-            <p>{item}</p>
+              {supportLabel && (
+                <p class="service-detail-port-captain-composite__content-label">{supportLabel}</p>
+              )}
+              <div class="service-detail-port-captain-composite__content-list">
+                {supportItems.map((item) => (
+                  <div class="service-detail-port-captain-composite__content-item">
+                    <span class="service-detail-port-captain-composite__content-bullet" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" class="service-detail-port-captain-composite__content-bullet-svg">
+                        <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                        <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </span>
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
+
+          <div class="service-detail-port-captain-composite__media-panel service-detail-port-captain-composite__media-panel--support">
+            <CmsImage
+              src={supportImage}
+              alt=""
+              wrapperClass="service-detail-port-captain-composite__media"
+              class="service-detail-port-captain-composite__media-image"
+              placeholderLabel=""
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--light">
+            <div class="service-detail-port-captain-composite__intro">
+              {supportTitle && <h2>{supportTitle}</h2>}
+              {supportText && <p>{supportText}</p>}
+            </div>
+          </div>
+
+          <div class="service-detail-port-captain-composite__panel service-detail-port-captain-composite__panel--gold">
+            {supportLabel && <p class="service-detail-port-captain-composite__label">{supportLabel}</p>}
+            <div class="service-detail-port-captain-composite__list">
+              {supportItems.map((item) => (
+                <div class="service-detail-port-captain-composite__item">
+                  <span class="service-detail-port-captain-composite__bullet" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" class="service-detail-port-captain-composite__bullet-svg">
+                      <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>
+                      <path d="M10.1 12.9v3.8l1.9-1.1 1.9 1.1v-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )
+    }
   </div>
 </section>
