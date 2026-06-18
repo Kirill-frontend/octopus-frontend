@@ -309,6 +309,73 @@ const globeUrl = resolvePayloadMediaUrl(data?.hero?.backgroundImage);
     }
   }
 
+  @media (max-width: 1320px) {
+    .home-block__panel,
+    .home-block__pills {
+      min-height: 660px;
+    }
+
+    .home-block__globe {
+      background-size: min(1260px, 116%);
+    }
+
+    .home-block__pill {
+      min-height: 70px;
+      padding: 0 30px;
+    }
+
+    .home-block__pill span {
+      font-size: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    .home-block__pill-slot--top,
+    .home-block__pill--top {
+      top: 100px;
+      width: 320px;
+    }
+
+    .home-block__pill-slot--left-upper,
+    .home-block__pill--left-upper {
+      top: 246px;
+      left: 14%;
+      width: 340px;
+    }
+
+    .home-block__pill-slot--center-upper,
+    .home-block__pill--center-upper {
+      top: 340px;
+      width: 276px;
+    }
+
+    .home-block__pill-slot--right-upper,
+    .home-block__pill--right-upper {
+      top: 246px;
+      right: 11%;
+      width: 374px;
+    }
+
+    .home-block__pill-slot--left-lower,
+    .home-block__pill--left-lower {
+      top: 404px;
+      left: 4.5%;
+      width: 280px;
+    }
+
+    .home-block__pill-slot--center-lower,
+    .home-block__pill--center-lower {
+      top: 470px;
+      width: 286px;
+    }
+
+    .home-block__pill-slot--right-lower,
+    .home-block__pill--right-lower {
+      top: 404px;
+      right: 4.5%;
+      width: 236px;
+    }
+  }
+
   @media (max-width: 1200px) {
     .home-block {
       padding: 92px 20px 48px;
