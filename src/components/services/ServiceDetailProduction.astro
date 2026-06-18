@@ -7,6 +7,7 @@ const {
   cards = [],
   complianceItems = [],
   backgroundImage,
+  transparentCards = false,
 } = Astro.props;
 ---
 
@@ -30,7 +31,12 @@ const {
 
       <div class="service-detail-production__grid">
         {cards.map((card) => (
-          <article class="service-detail-production__card">
+          <article
+            class:list={[
+              "service-detail-production__card",
+              transparentCards && "service-detail-production__card--transparent",
+            ]}
+          >
             <span class="service-detail-production__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" class="service-detail-production__icon-svg">
                 <path d="M12 3.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" fill="none" stroke="currentColor" stroke-width="1.6"></path>

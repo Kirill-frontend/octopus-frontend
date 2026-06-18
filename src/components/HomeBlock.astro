@@ -309,6 +309,83 @@ const globeUrl = resolvePayloadMediaUrl(data?.hero?.backgroundImage);
     }
   }
 
+  @media (max-width: 1200px) {
+    .home-block {
+      padding: 92px 20px 48px;
+    }
+
+    .home-block__panel,
+    .home-block__pills {
+      min-height: 640px;
+    }
+
+    .home-block__globe,
+    .home-block__globe-wrap {
+      inset: 6px 0 0;
+    }
+
+    .home-block__globe {
+      background-size: min(1180px, 118%);
+    }
+
+    .home-block__pill {
+      min-height: 68px;
+      padding: 0 28px;
+    }
+
+    .home-block__pill span {
+      font-size: 15px;
+      letter-spacing: 0.045em;
+      white-space: normal;
+    }
+
+    .home-block__pill-slot--top,
+    .home-block__pill--top {
+      top: 98px;
+      width: clamp(260px, 30vw, 340px);
+    }
+
+    .home-block__pill-slot--left-upper,
+    .home-block__pill--left-upper {
+      top: 242px;
+      left: 18%;
+      width: clamp(280px, 34vw, 380px);
+    }
+
+    .home-block__pill-slot--center-upper,
+    .home-block__pill--center-upper {
+      top: 336px;
+      width: clamp(240px, 26vw, 300px);
+    }
+
+    .home-block__pill-slot--right-upper,
+    .home-block__pill--right-upper {
+      top: 242px;
+      right: 14%;
+      width: clamp(300px, 36vw, 410px);
+    }
+
+    .home-block__pill-slot--left-lower,
+    .home-block__pill--left-lower {
+      top: 400px;
+      left: 7%;
+      width: clamp(240px, 28vw, 300px);
+    }
+
+    .home-block__pill-slot--center-lower,
+    .home-block__pill--center-lower {
+      top: 468px;
+      width: clamp(250px, 28vw, 310px);
+    }
+
+    .home-block__pill-slot--right-lower,
+    .home-block__pill--right-lower {
+      top: 400px;
+      right: 6%;
+      width: clamp(220px, 24vw, 270px);
+    }
+  }
+
   @media (max-width: 991px) {
     .home-block {
       padding: 104px 16px 40px;

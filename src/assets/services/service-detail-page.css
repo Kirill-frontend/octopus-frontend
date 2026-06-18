@@ -178,9 +178,8 @@
 }
 
 .service-detail-confidence-equation__track {
-  position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr) 100px minmax(0, 1fr);
   gap: 6px;
   width: 100%;
   min-height: 351px;
@@ -221,13 +220,11 @@
 }
 
 .service-detail-confidence-equation__symbol {
-  position: absolute;
-  top: 126px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100px;
-  height: 100px;
+  min-height: 351px;
   padding: 10px;
   box-sizing: border-box;
   background: #ffffff;
@@ -238,11 +235,11 @@
 }
 
 .service-detail-confidence-equation__symbol--plus {
-  left: calc(33.3333% - 49px);
+  grid-column: 2;
 }
 
 .service-detail-confidence-equation__symbol--equals {
-  left: calc(66.6666% - 51px);
+  grid-column: 4;
 }
 
 .service-detail-reasons {
@@ -874,6 +871,11 @@
   box-sizing: border-box;
 }
 
+.service-detail-production__card--transparent {
+  background: transparent;
+  border-color: #ffffff;
+}
+
 .service-detail-production__icon {
   display: inline-flex;
   width: 32px;
@@ -892,6 +894,11 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 28px;
+}
+
+.service-detail-production__card--transparent .service-detail-production__icon,
+.service-detail-production__card--transparent .service-detail-production__card-text {
+  color: #ffffff;
 }
 
 .service-detail-production__bottom {
@@ -2039,6 +2046,7 @@
 
 @media (max-width: 1800px) {
   .service-detail-confidence-equation__track {
+    grid-template-columns: minmax(0, 1fr) 84px minmax(0, 1fr) 84px minmax(0, 1fr);
     min-height: 290px;
   }
 
@@ -2064,24 +2072,16 @@
   }
 
   .service-detail-confidence-equation__symbol {
-    top: 103px;
     width: 84px;
-    height: 84px;
+    min-height: 290px;
     font-size: 42px;
     line-height: 42px;
-  }
-
-  .service-detail-confidence-equation__symbol--plus {
-    left: calc(33.3333% - 42px);
-  }
-
-  .service-detail-confidence-equation__symbol--equals {
-    left: calc(66.6666% - 42px);
   }
 }
 
 @media (max-width: 1400px) {
   .service-detail-confidence-equation__track {
+    grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr) 64px minmax(0, 1fr);
     min-height: 240px;
   }
 
@@ -2106,19 +2106,10 @@
   }
 
   .service-detail-confidence-equation__symbol {
-    top: 84px;
     width: 64px;
-    height: 64px;
+    min-height: 240px;
     font-size: 32px;
     line-height: 32px;
-  }
-
-  .service-detail-confidence-equation__symbol--plus {
-    left: calc(33.3333% - 32px);
-  }
-
-  .service-detail-confidence-equation__symbol--equals {
-    left: calc(66.6666% - 32px);
   }
 }
 

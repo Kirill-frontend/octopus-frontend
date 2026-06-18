@@ -176,6 +176,7 @@ const { blocks = [], servicePage } = Astro.props;
             cards={block.cards?.map((item) => item.text) ?? []}
             complianceItems={block.complianceItems?.map((item) => item.text) ?? []}
             backgroundImage={resolvePayloadMediaUrl(block.backgroundImage ?? block.image)}
+            transparentCards={block.transparentCards}
           />
         );
       case "consultationGrid":
