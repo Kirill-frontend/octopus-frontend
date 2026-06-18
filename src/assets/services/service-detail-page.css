@@ -902,8 +902,21 @@
 }
 
 @media (max-width: 1180px) {
+  .service-detail-production__top,
+  .service-detail-production__bottom {
+    width: auto;
+    margin: 0;
+    padding-left: 16px;
+  }
+
+  .service-detail-production__background,
   .service-detail-production__panel {
-    padding: 120px 64px 220px 48px;
+    width: calc(100% - 16px);
+  }
+
+  .service-detail-production__panel {
+    height: auto;
+    padding: 120px 64px 220px 32px;
   }
 
   .service-detail-production__title {
@@ -919,6 +932,12 @@
   .service-detail-production__card {
     height: auto;
     min-height: 200px;
+  }
+
+  .service-detail-production__bottom-track,
+  .service-detail-production__compliance,
+  .service-detail-production__placeholder {
+    width: calc(100% - 16px);
   }
 }
 
