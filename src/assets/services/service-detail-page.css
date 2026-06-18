@@ -2516,6 +2516,40 @@
     margin-top: -48px;
   }
 
+  .service-detail-confidence-equation__track {
+    grid-template-columns: 1fr;
+    gap: 0;
+    min-height: 0;
+  }
+
+  .service-detail-confidence-equation__card {
+    min-height: 0;
+  }
+
+  .service-detail-confidence-equation__card--expertise,
+  .service-detail-confidence-equation__card--insurance,
+  .service-detail-confidence-equation__card--result {
+    justify-content: center;
+    padding: 40px 24px;
+  }
+
+  .service-detail-confidence-equation__symbol {
+    width: 100%;
+    min-height: 72px;
+    padding: 12px 24px;
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .service-detail-confidence-equation__symbol--plus,
+  .service-detail-confidence-equation__symbol--equals {
+    grid-column: auto;
+  }
+
+  .service-detail-confidence-equation__text {
+    text-align: center;
+  }
+
   .service-detail-reasons__card,
   .service-detail-supply__card,
   .service-detail-structures__card,
