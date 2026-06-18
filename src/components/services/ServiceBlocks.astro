@@ -6,6 +6,7 @@ import AboutOffice from "../about/AboutOffice.astro";
 import ServiceDetailApproach from "./ServiceDetailApproach.astro";
 import ServiceDetailApproachSplit from "./ServiceDetailApproachSplit.astro";
 import ServiceDetailConfidence from "./ServiceDetailConfidence.astro";
+import ServiceDetailCenteredImageSection from "./ServiceDetailCenteredImageSection.astro";
 import ServiceDetailConsultation from "./ServiceDetailConsultation.astro";
 import ServiceDetailContainerEquipment from "./ServiceDetailContainerEquipment.astro";
 import ServiceDetailFeatureHighlightSplit from "./ServiceDetailFeatureHighlightSplit.astro";
@@ -263,6 +264,13 @@ const { blocks = [], servicePage } = Astro.props;
             supportTitle={block.supportTitle}
             supportText={block.supportText}
             supportImage={resolvePayloadMediaUrl(block.supportImage)}
+          />
+        );
+      case "centeredImageSection":
+        return (
+          <ServiceDetailCenteredImageSection
+            title={block.title}
+            image={resolvePayloadMediaUrl(block.image)}
           />
         );
       case "featureHighlightSplit":

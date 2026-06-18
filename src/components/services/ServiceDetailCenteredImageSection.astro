@@ -1,0 +1,28 @@
+---
+import CmsImage from "../shared/CmsImage.astro";
+import "../../assets/services/service-detail-page.css";
+
+interface Props {
+  title?: string;
+  image?: string;
+}
+
+const { title = "", image } = Astro.props as Props;
+---
+
+<section class="service-detail-centered-image-section">
+  <div class="service-detail-centered-image-section__inner">
+    {title && <h2 class="service-detail-centered-image-section__title">{title}</h2>}
+    {
+      image && (
+        <CmsImage
+          src={image}
+          alt={title || "Planning"}
+          wrapperClass="service-detail-centered-image-section__media"
+          class="service-detail-centered-image-section__image"
+          placeholderLabel={title || ""}
+        />
+      )
+    }
+  </div>
+</section>
