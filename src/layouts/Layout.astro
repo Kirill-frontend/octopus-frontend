@@ -15,6 +15,11 @@ const {
   footer,
 } = Astro.props;
 
+const siteFaviconSvg = resolvePayloadMediaUrl(siteSettings?.faviconSvg) || "/favicon.svg";
+const siteFaviconIco = resolvePayloadMediaUrl(siteSettings?.faviconIco);
+const siteAppleTouchIcon =
+  resolvePayloadMediaUrl(siteSettings?.appleTouchIcon) || siteFaviconSvg;
+
 const seoMeta = resolveSeoMeta(
   pageKey,
   {
@@ -39,12 +44,9 @@ const seoMeta = resolveSeoMeta(
     defaultRobots: siteSettings?.defaultRobots,
     themeColor: siteSettings?.themeColor,
     locale: siteSettings?.locale,
-    faviconSvg: resolvePayloadMediaUrl(siteSettings?.faviconSvg) || "/favicon.svg",
-    faviconIco: resolvePayloadMediaUrl(siteSettings?.faviconIco) || "/favicon.ico",
-    appleTouchIcon:
-      resolvePayloadMediaUrl(siteSettings?.appleTouchIcon) ||
-      resolvePayloadMediaUrl(siteSettings?.faviconSvg) ||
-      "/favicon.svg",
+    faviconSvg: siteFaviconSvg,
+    faviconIco: siteFaviconIco || siteFaviconSvg,
+    appleTouchIcon: siteAppleTouchIcon,
     defaultOgImage: resolvePayloadMediaUrl(siteSettings?.defaultOgImage) || "",
   },
 );
@@ -71,7 +73,9 @@ const seoMeta = resolveSeoMeta(
 		{seoMeta.ogImage && <meta name="twitter:image" content={seoMeta.ogImage} />}
 		{seoMeta.canonicalUrl && <link rel="canonical" href={seoMeta.canonicalUrl} />}
 		<link rel="icon" type="image/svg+xml" href={seoMeta.faviconSvg} />
-		<link rel="icon" href={seoMeta.faviconIco} sizes="any" />
+		{seoMeta.faviconIco !== seoMeta.faviconSvg && (
+			<link rel="icon" href={seoMeta.faviconIco} sizes="any" />
+		)}
 		<link rel="apple-touch-icon" href={seoMeta.appleTouchIcon} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{seoMeta.title}</title>
